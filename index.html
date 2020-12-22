@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Budget Save</title>
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./css/reset.css">
+  <link rel="stylesheet" href="./css/style.css">
+  <link rel="shortcut icon" type="image/png" href="./assets/favicon-96x96.png" />
+  <script src="https://kit.fontawesome.com/1389171202.js" crossorigin="anonymous"></script>
+  <link rel="stylesheet"
+    href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
+  <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
+    crossorigin="anonymous"></script>
+  <script src="./scripts/solmenu.js"></script>
+  <script src="./scripts/genelbakis.js"></script>
+</head>
+
+<body>
+  <div class="sol-menu">
+    <div class="sol-menu-button" id="hesaplar">
+      <i class="las la-credit-card" id="hesaplar-icon"></i>
+      <p class="hesaplar-text"> Hesaplar </p>
+    </div>
+
+    <div class="sol-menu-button" id="genel-bakis">
+      <i class="las la-chart-area" id="genel-bakis-icon"></i>
+      <p class="genel-bakis-text"> Genel Bakış </p>
+    </div>
+
+    <div class="sol-menu-button" id="kategoriler">
+      <i class="las la-shapes" id="kategoriler-icon"></i>
+      <p class="kategoriler-text"> Kategoriler </p>
+    </div>
+  </div>
+
+
+
+
+
+  <div class="ana">
+    <div class="hesaplar-container">
+      <p class="hesaplar-baslik" style="">Hesaplar</p>
+
+      <div class="hesaplar-liste">
+        <div class="hesap-item">
+          <i class="las la-trash"
+            style="float: right; font-size: 35px; padding-top: 5px; padding-right: 10px; color: #cc2d32; cursor: pointer;"></i>
+          <i class="las la-edit"
+            style="float: right; font-size: 35px; padding-top: 5px; color: #6e82ba; cursor: pointer;"></i>
+          <p class="hesap-item-text" style="float: right;"> Nakit </p>
+          <div class="item-wallet-icon-container" style="float: left;">
+            <i class="las la-wallet" id="hesap-item-icon-wallet"></i>
+          </div>
+        </div>
+
+        <div class="hesap-item">
+          <i class="las la-trash"
+            style="float: right; font-size: 35px; padding-top: 5px; padding-right: 10px; color: #cc2d32; cursor: pointer;"></i>
+          <i class="las la-edit"
+            style="float: right; font-size: 35px; padding-top: 5px; color: #6e82ba; cursor: pointer;"></i>
+          <p class="hesap-item-text" style="float: right;"> Kart </p>
+          <div class="item-card-icon-container" style="float: left;">
+            <i class="las la-credit-card" id="hesap-item-icon-wallet"></i>
+          </div>
+        </div>
+
+
+
+
+
+
+      </div>
+      <div class="hesap-ekle">
+        <i class="las la-plus" style="font-size: 35px;" id="hesap-ekle-icon"></i>
+        <p class="hesap-ekle-text"> Hesap Ekle </p>
+      </div>
+
+    </div>
+  </div>
+
+
+
+  <!--Hesap Ekleme Formu-->
+
+  <div class="hesap-ekle-form-arkaplan">
+
+    <div class="hesap-ekle-form">
+      <div class="hesap-ekleme-kapat-icon">
+        <i class="las la-times" id="hesap-ekleme-kapat-icon"></i>
+      </div>
+      <p class="form-baslik"> HESAP EKLE </p>
+      <input type="text" class="hesap-adi" placeholder="Hesap Adı">
+      <span class="para-input"> <input type="text" id="miktar" class="hesap-adi" placeholder="Miktar"></span>
+
+      <select name="para-birimi" class="para-birimi">
+        <option>Dolar</option>
+        <option>Türk Lirası</option>
+        <option>Euro</option>
+      </select>
+      <div class="radio-buttons">
+        <label class="container">Nakit
+          <input type="radio" name="radio">
+          <span class="checkmark"></span>
+        </label>
+
+        <label class="container">Kart
+          <input type="radio" name="radio">
+          <span class="checkmark"></span>
+        </label>
+      </div>
+
+      <div class="hesap-ekleme-onay-button">
+        <p class="text"> Ekle </p>
+      </div>
+    </div>
+  </div>
+
+
+
+</body>
+
+</html>
