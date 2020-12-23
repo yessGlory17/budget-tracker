@@ -427,3 +427,207 @@ option{
   margin-top: 5px;
   cursor: pointer;
 }
+
+
+/*HESAP DÜZENLEME FORM*/
+
+.duzenle-form-arkaplan{
+  padding: 0;
+  margin: 0;
+  top:0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  display: none; 
+  flex-direction: column;
+  align-items: center;
+  background-color: rgba(0,0,0,0.8);
+  position: fixed;
+  z-index: 1;
+}
+
+.hesap-duzenle-form{
+  width: 300px;
+  height: 300px;
+  background-color: #272B2F;
+  margin-top: 80px;
+  display: flex; 
+  flex-direction: column;
+  align-items: center;
+  box-shadow: 0 5px 8px rgba(0, 0, 0, 0.3);
+  border-radius: 5px;
+  position: fixed;
+  z-index: 1;
+}
+
+.hesap-duzenle-form > .form-duzenle-baslik{
+  font-family: 'Roboto';
+  font-size: 25px;
+  color: #3287cd;
+  padding-top: 20px;
+}
+
+.hesap-adi-duzenle{
+  width: 200px;
+  height: 30px;
+  margin-top: 5px;
+  margin-left: 10px;
+  background-color: #272B2F;
+  border: none;
+  border-bottom: 1px solid #A3A5A8;
+  font-size: 20px;
+  padding-top: 10px;
+  padding-bottom: 0px;
+  text-align: center;
+  color: #3287cd;
+  transition: color .5s, border-bottom .5s;
+  font-family: 'Roboto';
+  padding-left:12px;
+}
+
+.hesap-adi-duzenle:focus{
+  outline: none;
+  color:#3287cd;
+  border-bottom: 1px solid #3287cd;
+  transition: color .5s, border-bottom .5s;
+}
+
+.para-input{
+   font-family:'Roboto';
+   font-size: 25px;
+   
+}
+.currency-symbol {
+  position:absolute;
+  padding: 2px 5px;
+}
+
+/*Select Box*/
+select.para-birimi-duzenle{
+  width: 200px;
+  font-size: 20px;
+  font-family: 'Roboto';
+  border: none;
+  background-color: #272B2F;
+  text-align-last: center;
+  color: white;
+  margin-top: 10px;
+  margin-left: 10px;
+  color: #A3A5A8;
+  cursor: pointer;
+}
+select:focus{
+  border: none;
+}
+option{
+  width: 40vmax;
+  border: none;
+  text-align-last: center !important;
+  color: #A3A5A8;
+  cursor: pointer;
+}
+/*Radio Buttons*/
+
+.radio-buttons{
+  
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  
+}
+
+/* The container */
+.container {
+  display: block;
+  position: relative;
+  padding-left: 35px;
+  margin-bottom: 12px;
+  margin-left: 10px;
+  cursor: pointer;
+  font-size: 22px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  color: #A3A5A8;
+  margin-top: 20px;
+  font-family: 'Roboto';
+}
+
+/* Hide the browser's default radio button */
+.container input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+}
+
+/* Create a custom radio button */
+.checkmark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 25px;
+  width: 25px;
+  background-color: #212529;
+  border-radius: 50%;
+}
+
+/* On mouse-over, add a grey background color */
+.container:hover input ~ .checkmark {
+  background-color: #ccc;
+}
+
+/* When the radio button is checked, add a blue background */
+.container input:checked ~ .checkmark {
+  background-color: #3287cd;
+}
+
+/* Create the indicator (the dot/circle - hidden when not checked) */
+.checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+/* Show the indicator (dot/circle) when checked */
+.container input:checked ~ .checkmark:after {
+  display: block;
+}
+
+/* Style the indicator (dot/circle) */
+.container .checkmark:after {
+ 	top: 9px;
+	left: 9px;
+	width: 8px;
+	height: 8px;
+	border-radius: 50%;
+	background: white;
+}
+
+/*Hesap Ekleme Butonu*/
+.hesap-duzenle-button{
+  width: 100%;
+  height: 35px;
+  background-color: #3287cd;
+  position: absolute;
+  bottom: 0;
+  border-radius: 0px 0px 5px 5px;
+  cursor: pointer;
+}
+.hesap-duzenle-button > .text{
+  padding: 0;
+  margin: 0;
+  padding-top: 5px;
+  font-size: 20px;
+  font-family: 'Roboto';
+  color: white;
+  text-align: center;
+  
+}
+#hesap-duzenleme-kapat-icon{
+  color: white;
+  float: right;
+  margin-right: 10px;
+  margin-top: 5px;
+  cursor: pointer;
+}

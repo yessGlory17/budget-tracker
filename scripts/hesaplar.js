@@ -58,6 +58,11 @@ $(document).ready(function () {
     $(".hesap-ekle-form-arkaplan").fadeOut(1000);
   });
 
+  $("#hesap-duzenleme-kapat-icon").click(function () {
+    $(".duzenle-form-arkaplan").fadeOut(1000);
+  });
+
+
   $(".hesap-ekle").hover(function () {
     $(".hesap-ekle-text").fadeIn();
   }, function () {
@@ -107,9 +112,77 @@ $(document).ready(function () {
 
 
     $(".hesap-ekle-form-arkaplan").fadeOut(1000);
+    $(".hesap-item").remove();
     HesaplariGetir();
   }
+  var duzenlenecekID;
+  //Duzenleme Butonun Tıklanma Olayı
+  $(document).on("click", "#hesap-duzenle", function () {
+    duzenlenecekID = $(this).parent().attr("id");
 
+    $(".duzenle-form-arkaplan").fadeIn(1000).css("display", "flex");
+    DuzenlenecekHesabiGetir(duzenlenecekID);
+
+  });
+
+
+  //Duzenleme Onay Butonu
+  $(".hesap-duzenle-button").on("click", function () {
+    HesapDuzenle(duzenlenecekID);
+    $(".duzenle-form-arkaplan").fadeOut(1000).css("display", "flex");;
+  });
+  //-Butana tıklanınca formu görünür ya.
+  //Hesap Duzenleme 
+  function DuzenlenecekHesabiGetir(gelenID) {
+    $.ajax({
+      type: "POST",
+      url: "backend/duzenlenecekhesabigetir.php",
+      data: { id: gelenID },
+      dataType: "JSON",
+      success: function (cevap) {
+        console.log(cevap);
+        console.log(cevap[0]["hesapadi"]);
+        //console.log(JSON.parse(cevap));
+
+        $("#duzenle-ad").val(cevap[0]["hesapadi"]);
+        $("#duzenle-miktar").val(cevap[0]["bakiye"]);
+        $(".para-birimi-duzenle").val(cevap[0]["parabirimi"]);
+        $("input[name='duzenle-hesap-turu'][value='" + cevap[0]["tur"] + "'").prop("checked", true);
+        //alert(cevap);
+      },
+      error: function (err) {
+        console.log(err);
+      }
+    });
+  }
+
+  function HesapDuzenle(gelenID) {
+    var hesapadi = $("#duzenle-ad").val();
+    var miktar = $("#duzenle-miktar").val();
+    var paraBirimi = $(".para-birimi-duzenle option:selected").text();
+    //Hesap Turu
+    var hesapTuru = $('input[name="duzenle-hesap-turu"]:checked', "#duzenle-hesap-turu-form").val();
+
+    var t = { gelenID, hesapadi, miktar, paraBirimi, hesapTuru }
+    console.log(t);
+    $.ajax({
+      type: "POST",
+      url: "backend/hesapduzenle.php",
+      data: { id: gelenID, hesapadi: hesapadi, miktar: miktar, parabirimi: paraBirimi, tur: hesapTuru },
+      dataType: "JSON",
+      success: function (cevap) {
+        console.log(cevap);
+
+
+      },
+      error: function (err) {
+        console.log(err);
+      }
+    });
+
+    $(".hesap-item").remove();
+    HesaplariGetir();
+  }
 
   /*Hesap Ekleme Form*/
   var secilenParaBirimi = null;
@@ -297,7 +370,7 @@ $(document).ready(function () {
             '<p class="hesap-item-miktar" style="float: right;">' + item["bakiye"] + '</p>' +
             '</div>' +
             '<i class="las la-share" id="para-transfer" style="float: right; font-size: 35px; padding-top: 5px; padding-left: 10px; color: #b38d50; cursor: pointer;"></i>' +
-            '<i class="las la-edit" style="float: right; font-size: 35px; padding-top: 5px; padding-left: 10px; color: #6e82ba; cursor: pointer;"></i>' +
+            '<i class="las la-edit" style="float: right; font-size: 35px; padding-top: 5px; padding-left: 10px; color: #6e82ba; cursor: pointer;" id="hesap-duzenle"></i>' +
             '<i class="las la-trash" style="float: right; font-size: 35px; padding-top: 5px; padding-left: 10px; padding-right: 10px; color: #cc2d32; cursor: pointer;" id="hesap-sil"></i>' +
             '</div>';
 

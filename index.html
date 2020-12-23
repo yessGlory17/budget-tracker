@@ -126,6 +126,41 @@
   </div>
 
 
+  <!--Hesap Düzenleme Formu-->
+
+  <div class="duzenle-form-arkaplan">
+    <div class="hesap-duzenle-form">
+      <div class="hesap-ekleme-kapat-icon">
+        <i class="las la-times" id="hesap-duzenleme-kapat-icon"></i>
+      </div>
+      <p class="form-duzenle-baslik"> HESAP DÜZENLE </p>
+      <input type="text" class="hesap-adi-duzenle" placeholder="Hesap Adı" id="duzenle-ad">
+      <span class="para-input"> <input type="text" id="duzenle-miktar" class="hesap-adi-duzenle"
+          placeholder="Miktar"></span>
+
+      <select name="para-birimi" class="para-birimi-duzenle">
+        <option>Dolar</option>
+        <option>Türk Lirası</option>
+        <option>Euro</option>
+      </select>
+      <div class="radio-buttons" id="duzenle-hesap-turu-form">
+        <label class="container">Nakit
+          <input type="radio" name="duzenle-hesap-turu" value="Nakit">
+          <span class="checkmark"></span>
+        </label>
+
+        <label class="container">Kart
+          <input type="radio" name="duzenle-hesap-turu" value="Kart">
+          <span class="checkmark"></span>
+        </label>
+      </div>
+
+      <div class="hesap-duzenle-button">
+        <p class="text"> KAYDET </p>
+      </div>
+    </div>
+  </div>
+
 
 </body>
 
