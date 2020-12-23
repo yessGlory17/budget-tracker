@@ -164,6 +164,13 @@ $(document).ready(function () {
 
 
 
+  //Hesap Sil
+  $(document).on("click", "#hesap-sil", function () {
+    var id = $(this).parent().attr("id");
+
+    HesapSil(id);
+  });
+
 
   function SemboluBul() {
     if (secilenParaBirimi == "Türk Lirası") {
@@ -203,6 +210,25 @@ $(document).ready(function () {
   }
 
 
+  function HesapSil(id) {
+    var gID = id;
+    $.ajax({
+      type: "POST",
+      url: "backend/hesapsil.php",
+      data: { id: gID },
+      dataType: "JSON",
+      success: function (cevap) {
+        console.log(cevap);
+
+        //alert(cevap);
+      },
+      error: function (err) {
+        console.log(err);
+      }
+    });
+    $(".hesap-item").remove();
+    HesaplariGetir();
+  }
 
 
 
@@ -264,7 +290,7 @@ $(document).ready(function () {
 
           console.log("S: " + item["hesapadi"]);
           //Hesap Liste İtemi
-          var hesapItem = '<div class="hesap-item">' +
+          var hesapItem = '<div class="hesap-item" id="' + item["id"] + '">' +
             HesapTuruIcon(item["tur"]) +
             '<div class="hesaplar-item-text-container">' +
             '<p class="hesap-item-text" style="float: right;">' + item["hesapadi"] + '</p>' +
@@ -272,7 +298,7 @@ $(document).ready(function () {
             '</div>' +
             '<i class="las la-share" id="para-transfer" style="float: right; font-size: 35px; padding-top: 5px; padding-left: 10px; color: #b38d50; cursor: pointer;"></i>' +
             '<i class="las la-edit" style="float: right; font-size: 35px; padding-top: 5px; padding-left: 10px; color: #6e82ba; cursor: pointer;"></i>' +
-            '<i class="las la-trash" style="float: right; font-size: 35px; padding-top: 5px; padding-left: 10px; padding-right: 10px; color: #cc2d32; cursor: pointer;"></i>' +
+            '<i class="las la-trash" style="float: right; font-size: 35px; padding-top: 5px; padding-left: 10px; padding-right: 10px; color: #cc2d32; cursor: pointer;" id="hesap-sil"></i>' +
             '</div>';
 
 
