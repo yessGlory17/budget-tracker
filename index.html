@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Budget Save</title>
+  <title>Budget Tracker</title>
   <link rel="preconnect" href="https://fonts.gstatic.com">
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="./css/reset.css">
@@ -16,7 +16,7 @@
   <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
     crossorigin="anonymous"></script>
   <script src="./scripts/solmenu.js"></script>
-  <script src="./scripts/genelbakis.js"></script>
+  <script src="./scripts/hesaplar.js"></script>
 </head>
 
 <body>
@@ -35,6 +35,11 @@
       <i class="las la-shapes" id="kategoriler-icon"></i>
       <p class="kategoriler-text"> Kategoriler </p>
     </div>
+
+    <div class="sol-menu-button" id="hareketler">
+      <i class="las la-chart-line" id="hareketler-icon"></i>
+      <p class="hareketler-text"> Hareketler </p>
+    </div>
   </div>
 
 
@@ -43,36 +48,38 @@
 
   <div class="ana">
     <div class="hesaplar-container">
-      <p class="hesaplar-baslik" style="">Hesaplar</p>
+      <p class="hesaplar-baslik">HESAPLAR</p>
 
       <div class="hesaplar-liste">
-        <div class="hesap-item">
-          <i class="las la-trash"
-            style="float: right; font-size: 35px; padding-top: 5px; padding-right: 10px; color: #cc2d32; cursor: pointer;"></i>
-          <i class="las la-edit"
-            style="float: right; font-size: 35px; padding-top: 5px; color: #6e82ba; cursor: pointer;"></i>
-          <p class="hesap-item-text" style="float: right;"> Nakit </p>
+        <!--Referans Hesap Item-->
+        <!-- <div class="hesap-item">
           <div class="item-wallet-icon-container" style="float: left;">
             <i class="las la-wallet" id="hesap-item-icon-wallet"></i>
           </div>
-        </div>
-
-        <div class="hesap-item">
-          <i class="las la-trash"
-            style="float: right; font-size: 35px; padding-top: 5px; padding-right: 10px; color: #cc2d32; cursor: pointer;"></i>
+          <div class="hesaplar-item-text-container">
+            <p class="hesap-item-text" style="float: right;"> Garanti </p>
+            <p class="hesap-item-miktar" style="float: right;"> ₺1859 </p>
+          </div>
           <i class="las la-edit"
             style="float: right; font-size: 35px; padding-top: 5px; color: #6e82ba; cursor: pointer;"></i>
-          <p class="hesap-item-text" style="float: right;"> Kart </p>
+          <i class="las la-trash"
+            style="float: right; font-size: 35px; padding-top: 5px; padding-right: 10px; color: #cc2d32; cursor: pointer;"></i>
+        </div> -->
+        <!--Referans Hesap Item-->
+        <!-- <div class="hesap-item">
           <div class="item-card-icon-container" style="float: left;">
             <i class="las la-credit-card" id="hesap-item-icon-wallet"></i>
           </div>
-        </div>
+          <div class="hesaplar-item-text-container">
+            <p class="hesap-item-text" style="float: right;"> Ziraat </p>
+            <p class="hesap-item-miktar" style="float: right;"> $450 </p>
+          </div>
+          <i class="las la-edit"
+            style="float: right; font-size: 35px; padding-top: 5px; color: #6e82ba; cursor: pointer;"></i>
+          <i class="las la-trash"
+            style="float: right; font-size: 35px; padding-top: 5px; padding-right: 10px; color: #cc2d32; cursor: pointer;"></i>
 
-
-
-
-
-
+        </div> -->
       </div>
       <div class="hesap-ekle">
         <i class="las la-plus" style="font-size: 35px;" id="hesap-ekle-icon"></i>
@@ -81,8 +88,6 @@
 
     </div>
   </div>
-
-
 
   <!--Hesap Ekleme Formu-->
 
@@ -93,22 +98,23 @@
         <i class="las la-times" id="hesap-ekleme-kapat-icon"></i>
       </div>
       <p class="form-baslik"> HESAP EKLE </p>
-      <input type="text" class="hesap-adi" placeholder="Hesap Adı">
-      <span class="para-input"> <input type="text" id="miktar" class="hesap-adi" placeholder="Miktar"></span>
+      <input type="text" class="hesap-adi" placeholder="Hesap Adı" id="hesap-adi">
+      <span class="para-input"> <input type="text" id="miktar" class="hesap-adi" placeholder="Miktar"
+          id="miktar"></span>
 
       <select name="para-birimi" class="para-birimi">
         <option>Dolar</option>
         <option>Türk Lirası</option>
         <option>Euro</option>
       </select>
-      <div class="radio-buttons">
+      <div class="radio-buttons" id="hesap-turu-form">
         <label class="container">Nakit
-          <input type="radio" name="radio">
+          <input type="radio" value="Nakit" name="hesap-turu">
           <span class="checkmark"></span>
         </label>
 
         <label class="container">Kart
-          <input type="radio" name="radio">
+          <input type="radio" value="Kart" name="hesap-turu">
           <span class="checkmark"></span>
         </label>
       </div>

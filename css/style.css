@@ -83,11 +83,30 @@
     color: #A3A5A8/*#5ead87*/;
   }
 
+/*Hareketler İkon*/
+#hareketler{
+  margin-top: 20px;
+}
+
+#hareketler-icon{
+  font-size: 45px;
+  color: #A3A5A8 /*#21BF73*/;
+  padding-left: 12px;
+}
+
+.hareketler-text{
+  font-size: 12px;
+  font-family: 'Roboto';
+  text-align: center;
+  color: #A3A5A8/*#5ead87*/;
+}
+
+  
+
 .hesaplar-container{
-  width: 600px;
+  width: 700px;
   padding-bottom: 5px;
   background-color: #272B2F;
-  
   margin-top: 50px;
   border-radius: 5px;
   box-shadow: 0 5px 8px rgba(0, 0, 0, 0.3);
@@ -101,8 +120,8 @@ p.hesaplar-baslik{
   font-family: 'Roboto';
   text-align: center;
   font-size: 25px;
-  padding-top: 10px;
-  color: white;
+  padding-top: 20px;
+  color: #21BF73;
   
 }
 
@@ -113,12 +132,15 @@ p.hesaplar-baslik{
   align-items: center;
 }
 .hesap-item{
-  width: 98%;
+  width: 90%;
   height: 50px;
   margin-top: 10px;
   border-radius: 0px 5px 5px 0px;
   /*background-color: #2c3136;*/
   border: 1px solid #2c3136;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
 }
 
 #hesap-item-icon-wallet{
@@ -139,22 +161,43 @@ p.hesaplar-baslik{
   background-color: #36A2EB;
 }
 
+.hesaplar-item-text-container{
+  width: 80%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  /* border: 1px solid red; */
+  margin-left: 10px;
+}
+
 .hesap-item-text{
-  font-size: 30px;
+  font-size: 20px;
   font-family: 'Roboto';
   color: #A3A5A8;
-  margin-right: 300px;
+  
   padding-top: 5px;
+  padding-left: 20px;
+  text-align: center;
+}
+
+.hesap-item-miktar{
+  font-size: 20px;
+  font-family: 'Roboto';
+  color: #A3A5A8;  
+  padding-top: 5px;
+  padding-left: 50px;
+  text-align: center;
 }
 
 .hesap-ekle{
-  
-  bottom: 10px;
-  margin-top: 10px;
-  width: 99%;
-  
+  /* position: absolute; */
+  bottom: 0px;
+  margin-top: 20px;
+  width: 90%;
+  margin-bottom: 20px;
   border: 1px solid #2c3136;
-  background-color: #2c3136;
+  background-color: #272B2F;
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -280,6 +323,8 @@ option{
   flex-direction: row;
   align-items: center;
 }
+
+
 
 /* The container */
 .container {
