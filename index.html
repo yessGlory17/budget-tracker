@@ -17,6 +17,7 @@
     crossorigin="anonymous"></script>
   <script src="./scripts/solmenu.js"></script>
   <script src="./scripts/hesaplar.js"></script>
+  <script src="./scripts/transfer.js"></script>
 </head>
 
 <body>
@@ -161,6 +162,42 @@
     </div>
   </div>
 
+
+  <!--PARA TRANSFERİ FORMU-->
+  <div class="transfer-form-arkaplan">
+    <div class="transfer-form">
+      <div class="hesap-ekleme-kapat-icon">
+        <i class="las la-times" id="transfer-kapat-icon"></i>
+      </div>
+      <p class="transfer-form-baslik"> PARA TRANSFERİ </p>
+      <!--<input type="text" class="hesap-adi" placeholder="Hesap Adı">-->
+      <p class="gonderen-hesap-adi">
+        <!--Buraya Hesap Adı Gelecek-->
+      </p>
+      <span class="para-input"> <input type="text" id="transfer-miktar" class="transfer-hesap-adi"
+          placeholder="Miktar"></span>
+
+      <select name="hesap-secimi" class="hesap-secimi">
+        <!-- <option>Garanti [Nakit]</option>
+        <option>Maaş [Nakit]</option>
+        <option>Ziraat [Kart]</option> -->
+      </select>
+      <!--<div class="radio-buttons">
+      <label class="container">Nakit
+        <input type="radio"  name="radio">
+        <span class="checkmark"></span>
+      </label>
+      
+      <label class="container">Kart
+        <input type="radio"  name="radio">
+        <span class="checkmark"></span>
+      </label>
+    </div>-->
+      <div class="transfer-button" style="pointer-events: none; opacity: .3; cursor: not-allowed;">
+        <p class="text"> Transfer Et </p>
+      </div>
+    </div>
+  </div>
 
 </body>
 

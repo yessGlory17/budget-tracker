@@ -55,11 +55,12 @@ $(document).ready(function () {
   }
 
   $("#hesap-ekleme-kapat-icon").click(function () {
-    $(".hesap-ekle-form-arkaplan").fadeOut(1000);
+    $(".hesap-adi").val("");
+    $(".hesap-ekle-form-arkaplan").fadeOut(500);
   });
 
   $("#hesap-duzenleme-kapat-icon").click(function () {
-    $(".duzenle-form-arkaplan").fadeOut(1000);
+    $(".duzenle-form-arkaplan").fadeOut(500);
   });
 
 
@@ -73,7 +74,7 @@ $(document).ready(function () {
   $(".hesap-ekle").click(function () {
 
 
-    $(".hesap-ekle-form-arkaplan").fadeIn(1000).css("display", "flex");
+    $(".hesap-ekle-form-arkaplan").fadeIn(500).css("display", "flex");
 
     //$(".hesaplar-container").animate({left: '100px'});
   });
@@ -110,8 +111,8 @@ $(document).ready(function () {
       }
     });
 
-
-    $(".hesap-ekle-form-arkaplan").fadeOut(1000);
+    $("#hesap-adi").val("");
+    $(".hesap-ekle-form-arkaplan").fadeOut(500);
     $(".hesap-item").remove();
     HesaplariGetir();
   }
@@ -120,7 +121,7 @@ $(document).ready(function () {
   $(document).on("click", "#hesap-duzenle", function () {
     duzenlenecekID = $(this).parent().attr("id");
 
-    $(".duzenle-form-arkaplan").fadeIn(1000).css("display", "flex");
+    $(".duzenle-form-arkaplan").fadeIn(500).css("display", "flex");
     DuzenlenecekHesabiGetir(duzenlenecekID);
 
   });
@@ -129,7 +130,7 @@ $(document).ready(function () {
   //Duzenleme Onay Butonu
   $(".hesap-duzenle-button").on("click", function () {
     HesapDuzenle(duzenlenecekID);
-    $(".duzenle-form-arkaplan").fadeOut(1000).css("display", "flex");;
+    $(".duzenle-form-arkaplan").fadeOut(500).css("display", "flex");;
   });
   //-Butana tıklanınca formu görünür ya.
   //Hesap Duzenleme 
