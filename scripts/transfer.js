@@ -12,6 +12,7 @@ $(document).ready(function () {
     var transferID = null;
     var transferParaBirimi = null;
     var butce = null;
+    var ilkBakiye = null;
     //Hesabın transfer ikonuna tıklanınca transfer formunun gelmesi
     $(document).on("click", "#para-transfer", function () {
         transferID = $(this).parent().attr("id");
@@ -68,6 +69,7 @@ $(document).ready(function () {
                 $(hesaplar).each(function (index, item) {
                     if (item["hesapadi"] == hesap) {
                         transferEdenHesapID = item["id"];
+                        ilkBakiye = SemboluSil(item["bakiye"]);
                         bakiye = item["bakiye"];
                         console.log("B A K I Y E : " + bakiye);
                         bakiye = SemboluSil(bakiye);
@@ -128,7 +130,7 @@ $(document).ready(function () {
                 console.log("Hesaplar" + JSON.parse(response));
 
                 var hesaplar = JSON.parse(response);
-
+                var sonBakiye = 0;
                 $(hesaplar).each(function (index, item) {
                     if (item["hesapadi"] == hesap) {
                         alacakHesapID = item["id"];
@@ -139,8 +141,16 @@ $(document).ready(function () {
 
                         transferMiktar = SemboluSil(transferMiktar);
                         transferMiktar = parseInt(transferMiktar);
+                        ilkBakiye = parseInt(ilkBakiye);
+                        sonBakiye = parseInt(sonBakiye);
+                        sonBakiye = ilkBakiye - transferMiktar;
+                        sonBakiye = sonBakiye + '';
+                        sonBakiye = FindMoneySymbol(item["parabirimi"]) + sonBakiye;
                         transferSonuc = bakiye + transferMiktar;
-
+                        transferSonuc = transferSonuc + '';
+                        transferSonuc = FindMoneySymbol(item["parabirimi"]) + transferSonuc;
+                        //alert("TransferSonuc : " + transferSonuc);
+                        //alert("SonBakiye : " + sonBakiye);
                         //Transfer Ederken para sembolunu ekle
 
                         //Transfer Sorgusu
@@ -154,7 +164,24 @@ $(document).ready(function () {
                                 dataType: "JSON",
                                 success: function (cevap) {
                                     console.log(cevap);
+                                    $(".transfer-form-arkaplan").fadeOut(500);
+                                    //alert(cevap);
+                                },
+                                error: function (err) {
+                                    console.log(err);
+                                }
+                            });
 
+
+
+                            $.ajax({
+                                type: "POST",
+                                url: "backend/paratransfer.php",
+                                data: { id: transferEdenHesapID, yenibakiye: sonBakiye },
+                                dataType: "JSON",
+                                success: function (cevap) {
+                                    console.log(cevap);
+                                    $(".transfer-form-arkaplan").fadeOut(500);
                                     //alert(cevap);
                                 },
                                 error: function (err) {
