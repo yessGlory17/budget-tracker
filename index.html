@@ -15,9 +15,12 @@
     href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
   <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
     crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
   <script src="./scripts/solmenu.js"></script>
   <script src="./scripts/hesaplar.js"></script>
   <script src="./scripts/transfer.js"></script>
+  <script src="./scripts/kategoriler.js"></script>
+  <script src="./scripts/grafik.js"></script>
 </head>
 
 <body>
@@ -88,6 +91,74 @@
       </div>
 
     </div>
+
+
+    <!--Kategoriler-->
+    <div class="kategoriler-container">
+      <div class="graf-container">
+        <canvas id="doughnut-chart">
+        </canvas>
+      </div>
+
+
+      <div class="toplam-gider">
+        </p>
+        <p class="toplam-gider-text">Toplam Gider : ₺2784</p>
+      </div>
+      <div class="etiketler">
+
+        <div class="etiket-item" id="market-item">
+          <p class="etiket-text">Market</p>
+          <div class="etiket-icon" data-harcama-etiket="Market" data-post-name="market">
+            <i class="las la-shopping-basket" id="market-icon"></i>
+          </div>
+          <p class="etiket-harcama-text"> ₺400 </p>
+        </div>
+
+        <div class="etiket-item" id="saglik-item">
+          <p class="etiket-text">Sağlık</p>
+          <div class="etiket-icon" data-harcama-etiket="Sağlık" data-post-name="saglik">
+            <i class="las la-leaf" id="saglik-icon"></i>
+          </div>
+          <p class="etiket-harcama-text"> ₺20 </p>
+        </div>
+
+        <div class="etiket-item" id="ulasim-item">
+          <p class="etiket-text">Ulaşım</p>
+          <div class="etiket-icon" data-harcama-etiket="Ulaşım" data-post-name="ulasim">
+            <i class="las la-bus" id="ulasim-icon"></i>
+          </div>
+          <p class="etiket-harcama-text"> ₺320 </p>
+        </div>
+
+        <div class="etiket-item" id="yemek-item">
+          <p class="etiket-text">Yemek</p>
+          <div class="etiket-icon" data-harcama-etiket="Yemek" data-post-name="yemek">
+            <i class="las la-utensils" id="yemek-icon"></i>
+          </div>
+          <p class="etiket-harcama-text"> ₺110 </p>
+        </div>
+
+        <div class="etiket-item" id="sinema-item">
+          <p class="etiket-text">Sinema</p>
+          <div class="etiket-icon" data-harcama-etiket="Sinema" data-post-name="sinema">
+            <i class="las la-film" id="sinema-icon"></i>
+          </div>
+          <p class="etiket-harcama-text"> ₺110 </p>
+        </div>
+
+        <div class="etiket-item" id="egitim-item">
+          <p class="etiket-text">Eğitim</p>
+          <div class="etiket-icon" data-harcama-etiket="Eğitim" data-post-name="egitim">
+            <i class="las la-book" id="egitim-icon"></i>
+          </div>
+          <p class="etiket-harcama-text"> ₺560 </p>
+        </div>
+      </div>
+    </div>
+
+
+
   </div>
 
   <!--Hesap Ekleme Formu-->
@@ -198,6 +269,42 @@
       </div>
     </div>
   </div>
+
+
+  <!--HARCAMA FORMU-->
+
+  <div class="harcama-form-arkaplan">
+    <div class="harcama-form">
+      <div class="harcama-ekleme-kapat-icon">
+        <i class="las la-times" id="harcama-ekleme-kapat-icon"></i>
+      </div>
+      <p class="harcama-form-baslik"> HARCAMA EKLE </p>
+      <!--<input type="text" class="hesap-adi" placeholder="Hesap Adı">-->
+      <p class="harcama-kategori-adi">Market</p>
+      <span class="para-input"> <input type="text" id="harcama-miktar" class="hesap-adi" placeholder="Miktar"></span>
+
+      <select name="kategori-secimi" class="kategori-secimi">
+        <!-- <option>Market</option>
+        <option>Eğitim</option>
+        <option>Sinema</option> -->
+      </select>
+      <!--<div class="radio-buttons">
+      <label class="container">Nakit
+        <input type="radio"  name="radio">
+        <span class="checkmark"></span>
+      </label>
+      
+      <label class="container">Kart
+        <input type="radio"  name="radio">
+        <span class="checkmark"></span>
+      </label>
+    </div>-->
+      <div class="harcama-button">
+        <p class="text"> Ekle </p>
+      </div>
+    </div>
+  </div>
+
 
 </body>
 
