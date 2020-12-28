@@ -95,6 +95,9 @@ $(document).ready(function () {
         //alert(kategori);
         var harcamaMiktar = $("#harcama-miktar").val();
         var secilenHesap = $(".kategori-secimi option:selected").attr("value");
+        //alert("Harcam Miktar Test : " + harcamaMiktar + "Type  :  " + typeof (harcamaMiktar));
+        HareketEkle("Harcama", harcamaMiktar);
+
         $.ajax({
             type: "GET",
             url: "backend/hesaplarigetir.php",
@@ -144,6 +147,7 @@ $(document).ready(function () {
                                             success: function (cevap) {
                                                 console.log(cevap);
                                                 //alert(cevap);
+                                                //HareketEkle("Harcama", bakiye);
                                             },
                                             error: function (err) {
                                                 console.log(err);
@@ -181,6 +185,8 @@ $(document).ready(function () {
                                             dataType: "JSON",
                                             success: function (cevap) {
                                                 console.log(cevap);
+
+                                                //HareketEkle("Harcama", bakiye);
                                                 //alert(cevap);
                                             },
                                             error: function (err) {
@@ -218,6 +224,7 @@ $(document).ready(function () {
                                             success: function (cevap) {
                                                 console.log(cevap);
                                                 //alert(cevap);
+                                                //HareketEkle("Harcama", bakiye);
                                             },
                                             error: function (err) {
                                                 console.log(err);
@@ -253,6 +260,7 @@ $(document).ready(function () {
                                             dataType: "JSON",
                                             success: function (cevap) {
                                                 console.log(cevap);
+                                                //HareketEkle("Harcama", bakiye);
                                                 //alert(cevap);
                                             },
                                             error: function (err) {
@@ -482,5 +490,23 @@ $(document).ready(function () {
         })
 
         return temiz;
+    }
+
+    function HareketEkle(islemAdi, miktar) {
+        $.ajax({
+            type: "POST",
+            url: "backend/hareketekle.php",
+            data: { islem: islemAdi, miktar: miktar },
+            dataType: "JSON",
+            success: function (cevap) {
+                console.log(cevap);
+                console.log("Hareket Eklendi!");
+                //alert(cevap);
+            },
+            error: function (err) {
+                console.log(err);
+                console.log("Hareket Ekleme Başarısız!");
+            }
+        });
     }
 });

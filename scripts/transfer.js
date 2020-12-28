@@ -122,6 +122,7 @@ $(document).ready(function () {
         var transferMiktar = $("#transfer-miktar").val();
         var hesap = $(".hesap-secimi :selected").val();
         var transferSonuc;
+        var hareketMiktar;
         $.ajax({
             type: "GET",
             url: "backend/hesaplarigetir.php",
@@ -141,6 +142,7 @@ $(document).ready(function () {
 
                         transferMiktar = SemboluSil(transferMiktar);
                         transferMiktar = parseInt(transferMiktar);
+                        hareketMiktar = '₺' + transferMiktar;
                         ilkBakiye = parseInt(ilkBakiye);
                         sonBakiye = parseInt(sonBakiye);
                         sonBakiye = ilkBakiye - transferMiktar;
@@ -165,6 +167,9 @@ $(document).ready(function () {
                                 success: function (cevap) {
                                     console.log(cevap);
                                     $(".transfer-form-arkaplan").fadeOut(500);
+
+                                    //Para Transferi Hareketi Ekle
+                                    HareketEkle("Transfer", hareketMiktar);
                                     //alert(cevap);
                                 },
                                 error: function (err) {
@@ -183,6 +188,9 @@ $(document).ready(function () {
                                     console.log(cevap);
                                     $(".transfer-form-arkaplan").fadeOut(500);
                                     //alert(cevap);
+
+                                    //Para Transferi Hareketi Ekle
+                                    // HareketEkle("Transfer", hareketMiktar);
                                 },
                                 error: function (err) {
                                     console.log(err);
@@ -382,6 +390,22 @@ $(document).ready(function () {
     }
 
 
+    function HareketEkle(islemAdi, miktar) {
+        $.ajax({
+            type: "POST",
+            url: "backend/hareketekle.php",
+            data: { islem: islemAdi, miktar: miktar },
+            dataType: "JSON",
+            success: function (cevap) {
+                console.log(cevap);
+                console.log("Hareket Eklendi!");
+                //alert(cevap);
+            },
+            error: function (err) {
+                console.log(err);
+            }
+        });
+    }
 
 
 });
