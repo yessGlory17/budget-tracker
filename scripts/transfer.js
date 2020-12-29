@@ -169,7 +169,7 @@ $(document).ready(function () {
                                     $(".transfer-form-arkaplan").fadeOut(500);
 
                                     //Para Transferi Hareketi Ekle
-                                    HareketEkle("Transfer", hareketMiktar);
+                                    HareketEkle("Transfer", hareketMiktar, hesap);
                                     //alert(cevap);
                                 },
                                 error: function (err) {
@@ -390,11 +390,11 @@ $(document).ready(function () {
     }
 
 
-    function HareketEkle(islemAdi, miktar) {
+    function HareketEkle(islemAdi, miktar, kategori) {
         $.ajax({
             type: "POST",
             url: "backend/hareketekle.php",
-            data: { islem: islemAdi, miktar: miktar },
+            data: { islem: islemAdi, miktar: miktar, kategori: kategori },
             dataType: "JSON",
             success: function (cevap) {
                 console.log(cevap);

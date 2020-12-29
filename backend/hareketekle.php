@@ -8,10 +8,11 @@ if(isset($_POST["islem"])){
     session_start();
     $islem = $_POST["islem"];
     $miktar = $_POST["miktar"];
+    $kategori = $_POST["kategori"];
     $tarih = date("Y-m-d");
     //echo $baslik + $icerik + $etiketler;
-    $ekle = $db -> prepare("INSERT INTO hareketler SET islem=?, miktar=?, tarih=?");
-    $ekle -> execute(array($islem, $miktar, $tarih));
+    $ekle = $db -> prepare("INSERT INTO hareketler SET islem=?, miktar=?, kategori=?, tarih=?");
+    $ekle -> execute(array($islem, $miktar,$kategori, $tarih));
                 
                 
     if($ekle -> rowCount()){

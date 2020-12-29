@@ -1256,3 +1256,152 @@ option{
   margin-top: 5px;
   cursor: pointer;
 }
+
+/*HAREKETLER*/
+
+
+
+.hareketler-container{
+  width: 400px;
+  min-height: 500px;
+  background-color: #272B2F;
+  box-shadow: 0 5px 8px rgba(0, 0, 0, 0.3);
+  border-radius: 5px;
+  display: none; 
+  flex-direction: column;
+  align-items: center;
+  margin-top: 30px;
+  padding-bottom: 30px;
+}
+
+.hareket-item{
+  width: 90%;
+  height: 40px;
+  border: 1px solid #ced6e0;
+  margin-top: 10px;
+  border-radius: 5px;
+  display: flex; 
+  flex-direction: row;
+  align-items: center;
+}
+
+.hareket-item > .hareket-item-icon{
+  width: 60px;
+  height: 40px;
+  background-color: #7bed9f;
+  
+}
+
+.hareket-tarih{
+  padding: 0;
+  padding-top: 20px;
+  font-family: 'Roboto';
+  font-size: 30px;
+  text-align: left;
+  padding-right: 200px;
+  color: #ced6e0;
+}
+.tarih{
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+#ulasim-icon{
+  font-size: 30px;
+  padding: 0;
+  padding-left: 10px;
+  padding-top: 5px;
+  color: white;
+}
+
+#yemek-icon{
+  font-size: 30px;
+  padding: 0;
+  padding-left: 10px;
+  padding-top: 5px;
+  color: white;
+}
+
+#market-icon{
+  font-size: 30px;
+  padding: 0;
+  padding-left: 10px;
+  padding-top: 5px;
+  color: white;
+}
+
+#sinema-icon{
+  font-size: 30px;
+  padding: 0;
+  padding-left: 10px;
+  padding-top: 5px;
+  color: white;
+}
+
+#saglik-icon{
+  font-size: 30px;
+  padding: 0;
+  padding-left: 10px;
+  padding-top: 5px;
+  color: white;
+}
+
+#ulasim-icon{
+  font-size: 30px;
+  padding: 0;
+  padding-left: 10px;
+  padding-top: 5px;
+  color: white;
+}
+
+.hareket-islem-text-container{
+  width: 100px;
+  height: 40px;
+  border: 1px solid red;
+  
+}
+.text{
+  padding: 0;
+  padding-top: 0;
+  padding-left: 10px;
+  padding-right: 10px;
+  font-family: 'Roboto';
+  font-size: 20px;
+  color: #879BA8;
+}
+
+p.hareket-miktar{
+  padding: 0;
+  padding-top: 0;
+  padding-left: 10px;
+  padding-right: 10px;
+  font-family: 'Roboto';
+  font-size: 20px;
+  color: #879BA8;
+}
+
+/*Select Box*/
+select#tarih-araligi-secimi{
+  width: 200px;
+  font-size: 25px;
+  font-family: 'Roboto';
+  border: none;
+  background-color: #272B2F;
+  text-align-last: center;
+  color: white;
+  margin-top: 10px;
+  margin-left: 10px;
+  color: #A3A5A8;
+  cursor: pointer;
+}
+select:focus{
+  border: none;
+}
+option{
+  width: 40vmax;
+  border: none;
+  text-align-last: center !important;
+  color: #A3A5A8;
+  cursor: pointer;
+}

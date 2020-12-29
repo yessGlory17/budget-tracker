@@ -48,8 +48,8 @@ $(document).ready(function () {
     ActiveButtonControl();
     $("#hareketler").delay(3000).css("border-left", "5px solid #21BF73");
     $("#hareketler-icon").css("color", "#21BF73");
-    // $(".ana > *").css("display", "none");
-    // $(".hareketler-container").css("display", "flex");
+    $(".ana > *").css("display", "none");
+    $(".hareketler-container").css("display", "flex");
 
     //console.log(clickLeftButton);
   });
