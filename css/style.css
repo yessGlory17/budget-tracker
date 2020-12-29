@@ -871,7 +871,7 @@ option{
   width: 100vw;
   height: 70px;
   font-size: 35px;
-  font-familty:'Roboto';
+  font-family:'Roboto';
   display: flex;
   flex-direction: column;
   text-align: center;
@@ -1288,7 +1288,7 @@ option{
 .hareket-item > .hareket-item-icon{
   width: 60px;
   height: 40px;
-  background-color: #7bed9f;
+  background-color: #60a3bc;
   
 }
 
@@ -1355,6 +1355,14 @@ option{
   color: white;
 }
 
+#egitim-icon{
+  font-size: 30px;
+  padding: 0;
+  padding-left: 10px;
+  padding-top: 5px;
+  color: white;
+}
+
 .hareket-islem-text-container{
   width: 100px;
   height: 40px;
@@ -1405,3 +1413,6 @@ option{
   color: #A3A5A8;
   cursor: pointer;
 }
+
+/*HAREKETLER*/
+

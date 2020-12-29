@@ -10,6 +10,8 @@ $(document).ready(function () {
             var sonuc = JSON.parse(response);
             kopya = sonuc;
             console.log("Tarih Sonuc : " + response);
+            $(".tarih").remove();
+            tarihler = [];
             TarihleriAyir(sonuc);
             $(sonuc).each(function (index, item) {
 
@@ -36,22 +38,110 @@ $(document).ready(function () {
 
         }
     })
-    //-Gelen Kategoriye Göre İkon bastır.
-    //Seçim olduğunda seçime göre getir.
+
+
+    //Zaman Aralığına Göre Tarihi Getir.
+    $(document).on("change", "#tarih-araligi-secimi", function () {
+        var zamanAraligi = $(this).val();
+
+        if (zamanAraligi == "buhafta") {
+            //alert("Bu Hafta Secildi");
+            var aralik = "1";
+            $.ajax({
+                type: "GET",
+                url: "backend/hareketlertariharaligihafta.php",
+                success: function (response) {
+                    console.log("BU HAFTA HAREKET ==> " + JSON.parse(response));
+                    var sonuc = JSON.parse(response);
+                    kopya = sonuc;
+                    console.log("Tarih Sonuc : " + response);
+                    $(".tarih").remove();
+                    tarihler = [];
+                    TarihleriAyir(sonuc);
+                }
+            })
+        } else if (zamanAraligi == "bugun") {
+            //alert("Bu Gun Secildi");
+            $.ajax({
+                type: "GET",
+                url: "backend/hareketlertariharaligibugun.php",
+                success: function (response) {
+                    console.log("BU Gun HAREKET ==> " + JSON.parse(response));
+                    var sonuc = JSON.parse(response);
+                    kopya = sonuc;
+                    console.log("Tarih Sonuc : " + response);
+                    $(".tarih").remove();
+                    tarihler = [];
+                    TarihleriAyir(sonuc);
+                }
+            })
+        } else if (zamanAraligi == "buay") {
+            //alert("Bu Ay Secildi");
+            $.ajax({
+                type: "GET",
+                url: "backend/hareketlertariharaligiay.php",
+                success: function (response) {
+                    console.log("BU HAFTA HAREKET ==> " + JSON.parse(response));
+                    var sonuc = JSON.parse(response);
+                    kopya = sonuc;
+                    console.log("Tarih Sonuc : " + response);
+                    $(".tarih").remove();
+                    tarihler = [];
+                    TarihleriAyir(sonuc);
+                }
+            })
+        } else {
+            //Tüm Zamanlar..
+            //alert("Tüm Zamanlar Secildi");
+            //Default seçime göre hepsini gruplu getir.
+            $.ajax({
+                type: "GET",
+                url: "backend/harcamalarigetir.php",
+                success: function (response) {
+                    console.log("Hesaplar" + JSON.parse(response));
+                    var sonuc = JSON.parse(response);
+                    kopya = sonuc;
+                    console.log("Tarih Sonuc : " + response);
+                    $(".tarih").remove();
+                    tarihler = [];
+                    TarihleriAyir(sonuc);
+                }
+            })
+        }
+
+    });
 
 
     //Harcama Kategorisine Göre İkonu Getirir.
     function IkonuBul(kategori, alan) {
         if (alan == "Harcama") {
-            if ("market") {
+            if (kategori == "market") {
                 return '<i class="las la-shopping-basket" id="market-icon"></i>';
-            } else {
+            }
+
+            if (kategori == "saglik") {
+                return '<i class="las la-leaf" id="saglik-icon"></i>';
+            }
+
+            if (kategori == "ulasim") {
+                return '<i class="las la-bus" id="ulasim-icon"></i>';
+            }
+
+            if (kategori == "yemek") {
+                return '<i class="las la-utensils" id="yemek-icon"></i>';
+            }
+            if (kategori == "sinema") {
                 return '<i class="las la-film" id="sinema-icon"></i>';
+            }
+
+            if (kategori == "egitim") {
+                return '<i class="las la-book" id="egitim-icon"></i>';
             }
         }
 
         if (alan == "Transfer") {
             //Buradakileri Yap.
+            return '<i class="las la-exchange-alt" id="saglik-icon"></i>';
         }
     }
 
@@ -93,24 +183,19 @@ $(document).ready(function () {
                     var tarihIdContainer = '#' + item3["tarih"];
                     var HareketItem = '<div class="hareket-item">' +
                         '<div class="hareket-item-icon">' +
-                        IkonuBul(item3["kategori"]) +
+                        IkonuBul(item3["kategori"], item3["islem"]) +
                         '</div >' +
                         '<p class="text">' + item3["islem"] + '</p>' +
                         '<p class="hareket-miktar">' + item3["miktar"] + '</p>' +
                         '<p class="hareket-miktar">' + item3["kategori"] + '</p>' +
                         '</div >';
+
+
                     $(tarihIdContainer).append(HareketItem);
                 })
             });
             return;
         }
-
-
-
-
-
-
-
     }
 
 
