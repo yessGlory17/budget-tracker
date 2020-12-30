@@ -157,10 +157,18 @@ $(document).ready(function () {
     });
   }
 
+  // $(document).on("change", ".para-birimi-duzenle", function () {
+  //   var p = $(this).val();
+  //   secilenParaBirimi = p;
+  //   SemboluBul();
+  //   var m = $("#duzenle-miktar").val();
+  //   SemboluGuncelle(m, secilenParaBirimiSembolu);
+  // });
   function HesapDuzenle(gelenID) {
     var hesapadi = $("#duzenle-ad").val();
     var miktar = $("#duzenle-miktar").val();
     var paraBirimi = $(".para-birimi-duzenle option:selected").text();
+
     //Hesap Turu
     var hesapTuru = $('input[name="duzenle-hesap-turu"]:checked', "#duzenle-hesap-turu-form").val();
 
@@ -276,6 +284,31 @@ $(document).ready(function () {
         m = m.replace(removeItem, s);
 
         $("#miktar").val(m);
+
+
+      }
+    })
+
+  }
+
+
+  function HesapDuzenleSemboluGuncelle(m, s) {
+
+    var paraSemboller = ["$", "€", "₺", "£"];
+    $(paraSemboller).each(function (index, item) {
+      var sonuc = m.indexOf(item);
+      if (sonuc > -1) {
+        //O kelimenin indexini bulup onun yerine koyulmalı
+        //alert(miktar[sonuc]);
+        var removeItem = m[sonuc];
+
+        /*miktar = jQuery.grep(miktar, function(value) {
+              return value != removeItem;
+        });*/
+
+        m = m.replace(removeItem, s);
+
+        $("#duzenle-miktar").val(m);
 
 
       }

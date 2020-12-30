@@ -1,5 +1,6 @@
 $(document).ready(function () {
     function renderChart(data, labels, harcamalar) {
+
         var ctx = document.getElementById("doughnut-chart").getContext('2d');
         var myChart = new Chart(ctx, {
             type: 'doughnut',
@@ -29,6 +30,9 @@ $(document).ready(function () {
     GrafikYukle();
 
     function GrafikYukle() {
+        data = [];
+        labels = [];
+        harcamalar = [];
         $.ajax({
             type: "GET",
             url: "backend/kategoribilgileri.php",
@@ -41,12 +45,8 @@ $(document).ready(function () {
                 //Alınan kategori bilgilerini işle
 
                 $(hesaplar).each(function (index, item) {
-                    if (labels.includes(item.kategori_adi)) {
-
-                    } else {
-
+                    if (!labels.includes(item.kategori_adi)) {
                         labels.push(item.kategori_adi);
-
                     }
 
                     if (!harcamalar.includes(item.harcama)) {

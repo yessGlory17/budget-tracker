@@ -940,6 +940,22 @@ option{
   transition: width .5s, height .5s;
 }
 .etiket-icon:hover > i{
+  font-size: 40px !important;
+  padding-top: 15px !important;
+  padding-left: 15px !important;
+
+  transition: font-size .5s , padding-top .5s, padding-left .5s !important;
+}
+
+i[data-icon-type="kategori"]:hover{
+  font-size: 40px;
+  padding-top: 15px;
+  padding-left: 15px;
+
+  transition: font-size .5s , padding-top .5s, padding-left .5s;
+}
+
+.etiket-icon i:hover{
   font-size: 40px;
   padding-top: 15px;
   padding-left: 15px;
@@ -1311,7 +1327,7 @@ option{
   font-size: 30px;
   padding: 0;
   padding-left: 10px;
-  padding-top: 5px;
+  padding-top: 10px;
   color: white;
 }
 
@@ -1319,7 +1335,7 @@ option{
   font-size: 30px;
   padding: 0;
   padding-left: 10px;
-  padding-top: 5px;
+  padding-top: 10px;
   color: white;
 }
 
@@ -1327,7 +1343,7 @@ option{
   font-size: 30px;
   padding: 0;
   padding-left: 10px;
-  padding-top: 5px;
+  padding-top: 10px;
   color: white;
 }
 
@@ -1335,7 +1351,7 @@ option{
   font-size: 30px;
   padding: 0;
   padding-left: 10px;
-  padding-top: 5px;
+  padding-top: 10px;
   color: white;
 }
 
@@ -1343,7 +1359,7 @@ option{
   font-size: 30px;
   padding: 0;
   padding-left: 10px;
-  padding-top: 5px;
+  padding-top: 10px;
   color: white;
 }
 
@@ -1351,7 +1367,7 @@ option{
   font-size: 30px;
   padding: 0;
   padding-left: 10px;
-  padding-top: 5px;
+  padding-top: 10px;
   color: white;
 }
 
@@ -1359,7 +1375,7 @@ option{
   font-size: 30px;
   padding: 0;
   padding-left: 10px;
-  padding-top: 5px;
+  padding-top: 10px;
   color: white;
 }
 
