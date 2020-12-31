@@ -1,228 +1,412 @@
 $(document).ready(function () {
 
-  //Bu değişken karşılaştırma için tıklanan nesneyi tutacak.
-  var clickLeftButton = null;
-
-  //Hesaplar divine tıklanınca çalışacak fonksiyon
-  $("#hesaplar").on("click", function () {
-    //alert();
-    ActiveButtonControl();
-    $("#hesaplar").delay(3000).css("border-left", "5px solid #21BF73");
-    $("#hesaplar-icon").css("color", "#21BF73");
-    clickLeftButton = $(this);
-
-  });
-
-  $("#genel-bakis").on("click", function () {
-    //alert();
-    ActiveButtonControl();
-    $("#genel-bakis").delay(3000).css("border-left", "5px solid #21BF73");
-    $("#genel-bakis-icon").css("color", "#21BF73");
-    clickLeftButton = $(this);
-    //console.log(clickLeftButton);
-  });
-
-  $("#kategoriler").on("click", function () {
-    //alert();
-
-    ActiveButtonControl();
-    $("#kategoriler").delay(3000).css("border-left", "5px solid #21BF73");
-    $("#kategoriler-icon").css("color", "#21BF73");
-    clickLeftButton = $(this);
-    //console.log(clickLeftButton);
-  });
-
-
-  //Bu fonksiyon menude kullanılacak buttonların aktifliğini kontrol ederek ona göre css uygular.
-  function ActiveButtonControl() {
-
-    //Bu değişken sol menu buttonlarını karşılaştırma için tutar.
-    var leftButtons = $(".sol-menu-button");
-    $(".sol-menu-button").each(function (index, item) {
-      //Eğer item tıklanan nesne değilse borderını kaldır ve rengini aktif olmayan rengine geçir.
-      if (item != clickLeftButton) {
-        $(item).css("border-left", "none");
-        $(item).children().css("color", "#A3A5A8");
-        //console.log(leftButtons);
-        //console.log("Find : " + item["id"] );
-      }
+    $(".gelir-goster-button").click(function () {
+        $(".giderler-panel").fadeOut(500).css("display", "none");
+        $(".gelirler-panel").fadeIn(500).css("display", "flex");
+        $("p.gider-goster-text").css("color", "#A3A5A8");
+        $("p.gelir-goster-text").css("color", "#74b9ff");
     });
 
-  }
+    $(".gider-goster-button").click(function () {
 
-  $("#hesap-ekleme-kapat-icon").click(function () {
-    $(".hesap-ekle-form-arkaplan").fadeOut(1000);
-  });
-
-  $(".hesap-ekle").hover(function () {
-    $(".hesap-ekle-text").fadeIn();
-  }, function () {
-    $(".hesap-ekle-text").fadeOut();
-  });
+        $(".gelirler-panel").fadeOut(500).css("display", "none");
+        $(".giderler-panel").fadeIn(500).css("display", "flex !important");
+        $("p.gelir-goster-text").css("color", "#A3A5A8");
+        $("p.gider-goster-text").css("color", "#74b9ff");
+    });
 
 
-  $(".hesap-ekle").click(function () {
-    HesapEkle();
+    //Gelir Ekleme Formu Açma
 
-    $(".hesap-ekle-form-arkaplan").fadeIn(1000).css("display", "flex");
+    $(".gelir-ekle-button").click(function () {
+        $(".gelir-form-arkaplan").css("display", "flex");
 
-    //$(".hesaplar-container").animate({left: '100px'});
-  });
-
-  function HesapEkle() {
-    var kart = '<div class="hesap-item">' +
-      '<i class="las la-trash" style="float: right; font-size: 35px; padding-top: 5px; padding-right: 10px; color: #cc2d32; cursor: pointer;"></i>' +
-      '<i class="las la-edit" style="float: right; font-size: 35px; padding-top: 5px; color: #6e82ba; cursor: pointer;"></i>' +
-      '<p class="hesap-item-text" style="float: right;"> Nakit </p>' +
-      '<div class="item-wallet-icon-container" style="float: left;">' +
-      '<i class="las la-wallet" id="hesap-item-icon-wallet" ></i>' +
-      '</div>' +
-      '</div>';
-
-    $(".hesaplar-liste").append(kart);
-
-  }
+        //Burada Hesap İsimleri Selectbox içine Eklenecek.
+        HesapIsimleriniGetir();
+    });
 
 
-  /*Hesap Ekleme Form*/
-  var secilenParaBirimi = null;
-  var secilenParaBirimiSembolu = null;
-  var ParaBirimleriVeSemboller = '{"TürkLirası" : "₺", "Dolar":"$","Euro":"€","Sterlin":"£"}';
-  //Bununla Para Miktarı İnputuna Değer Girilmeye Başlayınca Yazının Başına Paranın Sembolünü Ekliyorum.
-  ParaBirimleriVeSemboller = JSON.parse(ParaBirimleriVeSemboller);
-  console.log(ParaBirimleriVeSemboller);
+    //Formu Kapatma
+    $("#gelir-ekleme-kapat-icon").click(function () {
+        $(".gelir-form-arkaplan").fadeOut(500);
+    });
 
-  $("#miktar").keypress(function () {
-    var miktar = $("#miktar").val();
-    if (secilenParaBirimiSembolu == null) {
-      secilenParaBirimiSembolu = ParaBirimleriVeSemboller.Dolar;
+
+
+    //Gelir Ekleme Onay Button
+    $(".gelir-ekleme-button").click(function () {
+
+        //$(".gelir-form-arkaplan").fadeOut(500);
+        GelirEkle();
+        //Gelir Adını Al
+        var gelirAdi = $("#gelir-adi").val();
+        //Gelir Miktarını Al
+        var gelirMiktar = $("#gelir-miktar").val();
+        //alert("Gelir Miktar => " + gelirMiktar);
+        //Seçili Hesap Adını Al
+        var secilenHesap = $(".gelir-ekle-hesap-secimi :selected").val();
+
+        //Burada Hemen Veri Tabanına Ekle
+        $.ajax({
+            type: "GET",
+            url: "backend/hesaplarigetir.php",
+            success: function (response) {
+                var hesapParaBirimi;
+                console.log("Hesaplar" + JSON.parse(response));
+
+                var hesaplar = JSON.parse(response);
+
+
+                $(hesaplar).each(function (index, item) {
+                    //alert("Test #1 : " + item["hesapadi"]);
+                    if (item["hesapadi"] == secilenHesap) {
+                        //alert("Test #2 : " + item["hesapadi"]);
+                        var secilenHesapID = item["id"];
+                        var bakiye = item["bakiye"];
+                        //temizle
+                        bakiye = SemboluSil(bakiye);
+                        //int yap
+                        bakiye = parseFloat(bakiye);
+
+                        gelirMiktar = SemboluSil(gelirMiktar);
+                        gelirMiktar = parseFloat(gelirMiktar);
+                        if (item["parabirimi"] == "Dolar") {
+                            $.ajax({
+                                type: "GET",
+                                url: "backend/dovizsonucgetir.php",
+                                success: function (response) {
+
+                                    var s = JSON.parse(response);
+                                    console.log("Döviz Sonucu(json) : " + s);
+                                    //alert(s.dolar[0]);
+                                    gelirMiktar = gelirMiktar / parseFloat(s.dolar[0]);
+                                    gelirMiktar = gelirMiktar.toFixed(2)
+                                    //işlemi yap
+                                    bakiye = parseFloat(bakiye);
+                                    bakiye = parseFloat(bakiye) + parseFloat(gelirMiktar)
+                                    console.log("Son Bakiye : " + bakiye + "Tip : " + typeof (bakiye))
+                                    //₺ ekleyerek string yap
+                                    bakiye = bakiye.toFixed(2);
+                                    bakiye = "$" + bakiye;
+                                    //Post Et
+                                    $.ajax({
+                                        type: "POST",
+                                        url: "backend/paratransfer.php",
+                                        data: { id: secilenHesapID, yenibakiye: bakiye },
+                                        dataType: "JSON",
+                                        success: function (cevap) {
+                                            console.log(cevap);
+                                            //alert(cevap);
+                                            //HareketEkle("Harcama", bakiye);
+                                        },
+                                        error: function (err) {
+                                            console.log(err);
+                                        }
+                                    });
+                                }
+                            })
+                        }
+
+
+
+                        if (item["parabirimi"] == "Euro") {
+                            $.ajax({
+                                type: "GET",
+                                url: "backend/dovizsonucgetir.php",
+                                success: function (response) {
+
+                                    var s = JSON.parse(response);
+                                    console.log("Döviz Sonucu(json) : " + s);
+                                    //alert(s.dolar[0]);
+                                    gelirMiktar = gelirMiktar / parseFloat(s.euro[0]);
+                                    gelirMiktar = gelirMiktar.toFixed(2)
+                                    //işlemi yap
+                                    bakiye = parseFloat(bakiye);
+                                    bakiye = parseFloat(bakiye) + parseFloat(gelirMiktar)
+                                    console.log("Son Bakiye : " + bakiye + "Tip : " + typeof (bakiye))
+                                    //₺ ekleyerek string yap
+                                    bakiye = bakiye.toFixed(2);
+                                    bakiye = "€" + bakiye;
+                                    //Post Et
+                                    $.ajax({
+                                        type: "POST",
+                                        url: "backend/paratransfer.php",
+                                        data: { id: secilenHesapID, yenibakiye: bakiye },
+                                        dataType: "JSON",
+                                        success: function (cevap) {
+                                            console.log(cevap);
+
+                                            //HareketEkle("Harcama", bakiye);
+                                            //alert(cevap);
+                                        },
+                                        error: function (err) {
+                                            console.log(err);
+                                        }
+                                    });
+                                }
+                            })
+                        }
+
+                        if (item["parabirimi"] == "Sterlin") {
+                            $.ajax({
+                                type: "GET",
+                                url: "backend/dovizsonucgetir.php",
+                                success: function (response) {
+
+                                    var s = JSON.parse(response);
+                                    console.log("Döviz Sonucu(json) : " + s.sterlin[0]);
+                                    //alert(s.dolar[0]);
+                                    gelirMiktar = gelirMiktar / parseFloat(s.sterlin[0]);
+                                    gelirMiktar = gelirMiktar.toFixed(2)
+                                    if (bakiye > gelirMiktar) {
+                                        bakiye = parseFloat(bakiye);
+                                        bakiye = parseFloat(bakiye) + parseFloat(gelirMiktar)
+                                        console.log("Son Bakiye : " + bakiye + "Tip : " + typeof (bakiye))
+                                        //₺ ekleyerek string yap
+                                        bakiye = bakiye.toFixed(2);
+                                        bakiye = "$" + bakiye;
+                                        //Post Et
+                                        $.ajax({
+                                            type: "POST",
+                                            url: "backend/paratransfer.php",
+                                            data: { id: secilenHesapID, yenibakiye: bakiye },
+                                            dataType: "JSON",
+                                            success: function (cevap) {
+                                                console.log(cevap);
+                                                //alert(cevap);
+                                                //HareketEkle("Harcama", bakiye);
+                                            },
+                                            error: function (err) {
+                                                console.log(err);
+                                            }
+                                        });
+                                    }
+                                }
+                            })
+                        }
+
+                        if (item["parabirimi"] == "Türk Lirası") {
+                            $.ajax({
+                                type: "GET",
+                                url: "backend/dovizsonucgetir.php",
+                                success: function (response) {
+
+                                    var s = JSON.parse(response);
+                                    console.log("Döviz Sonucu(json) : " + s);
+                                    //alert(s.dolar[0]);
+                                    //gelirMiktar = gelirMiktar / parseFloat(s.dolar[0]);
+
+                                    if (bakiye > gelirMiktar) {
+                                        //işlemi yap
+                                        bakiye = bakiye + gelirMiktar
+                                        console.log("Son Bakiye : " + bakiye + "Tip : " + typeof (bakiye))
+                                        //₺ ekleyerek string yap
+                                        bakiye = "₺" + bakiye;
+                                        //Post Et
+                                        $.ajax({
+                                            type: "POST",
+                                            url: "backend/paratransfer.php",
+                                            data: { id: secilenHesapID, yenibakiye: bakiye },
+                                            dataType: "JSON",
+                                            success: function (cevap) {
+                                                console.log(cevap);
+                                                //HareketEkle("Harcama", bakiye);
+                                                //alert(cevap);
+                                            },
+                                            error: function (err) {
+                                                console.log(err);
+                                            }
+                                        });
+                                    }
+                                }
+                            })
+                        }
+
+                    }
+                });
+            }
+        })
+
+        $(".gelir-form-arkaplan").fadeOut(500);
+    });
+
+
+
+    function GelirEkle() {
+        //Gelir Adını Al
+        var gelirAdi = $("#gelir-adi").val();
+        //Gelir Miktarını Al
+        var gelirMiktar = $("#gelir-miktar").val();
+        //alert("Gelir Miktar => " + gelirMiktar);
+        //Seçili Hesap Adını Al
+        var secilenHesap = $(".gelir-ekle-hesap-secimi :selected").val();
+        $.ajax({
+            type: "POST",
+            url: "backend/gelirekle.php",
+            data: { geliradi: gelirAdi, gelirmiktar: gelirMiktar, gelirhesap: secilenHesap },
+            dataType: "JSON",
+            success: function (cevap) {
+                console.log(cevap);
+                //$(".transfer-form-arkaplan").fadeOut(500);
+                //alert(cevap);
+
+                //Para Transferi Hareketi Ekle
+                // HareketEkle("Transfer", hareketMiktar);
+            },
+            error: function (err) {
+                console.log(err);
+            }
+        });
     }
 
-    if (miktar.indexOf(secilenParaBirimiSembolu) == -1) {
+    //Get metoduyla veri tabanından hesap isimlerini alıp dinamik olarak selectbox içerisine ekleme.
+    function HesapIsimleriniGetir() {
+        $.ajax({
+            type: "GET",
+            url: "backend/hesaplarigetir.php",
+            success: function (response) {
+                var hesapParaBirimi;
+                console.log("Hesaplar" + JSON.parse(response));
 
-      var yeniMiktar = secilenParaBirimiSembolu + miktar;
-      $("#miktar").val(yeniMiktar);
+                var hesaplar = JSON.parse(response);
 
-      var paraSemboller = ["$", "€", "₺", "£"];
-      $(paraSemboller).each(function (index, item) {
-        var sonuc = miktar.indexOf(item);
-        if (sonuc > -1) {
-          //O kelimenin indexini bulup onun yerine koyulmalı
-          //alert(miktar[sonuc]);
-          var removeItem = miktar[sonuc];
+                //$(".transfer-edilecek-hesap").remove();
 
-          /*miktar = jQuery.grep(miktar, function(value) {
-                return value != removeItem;
-          });*/
+                $(hesaplar).each(function (index, item) {
+                    //console.log(item["hesapadi"]);
 
-          miktar = miktar.replace(removeItem, secilenParaBirimiSembolu);
-          //alert(miktar);
-          //miktar[0] = miktar.splice(sonuc,1,secilenParaBirimiSembolu);
-          //alert(miktar[sonuc]);
-          //miktar[sonuc] = secilenParaBirimiSembolu;
-          $("#miktar").val(miktar);
 
-          //alert("Bulundu:"  + item);
+                    var n = item["bakiye"];
+                    console.log("Bakiye : " + n);
+                    console.log("Para Sembolu Silinmiş Miktar : " + SemboluSil(item["bakiye"]));
+
+
+                });
+
+                $(".transfer-edilecek-hesap").remove();
+                $(hesaplar).each(function (index, item) {
+                    //console.log(item["hesapadi"]);
+
+                    var optionBilgi = item["hesapadi"] + "[" + item["tur"] + "]";
+                    var eklenecekOption = '<option class="transfer-edilecek-hesap" value="' + item["hesapadi"] + '">' + optionBilgi + '</option>';
+
+                    $(".gelir-ekle-hesap-secimi").append(eklenecekOption);
+
+                    // if (item["id"] != transferID) {
+                    //     if (item["parabirimi"] == hesapParaBirimi) {
+
+                    //     }
+                    // }
+
+                });
+            }
+        })
+    }
+
+
+    function SemboluSil(m) {
+        var temiz = null;
+        var paraSemboller = ["$", "€", "₺", "£"];
+        $(paraSemboller).each(function (index, item) {
+            var sonuc = m.indexOf(item);
+            if (sonuc > -1) {
+                //O kelimenin indexini bulup onun yerine koyulmalı
+                var removeItem = m[sonuc];
+
+                m = m.replace(removeItem, "");
+
+
+
+                temiz = m;
+            }
+        })
+
+        return temiz;
+    }
+
+
+
+
+
+    var secilenParaBirimi = null;
+    var secilenParaBirimiSembolu = null;
+    var ParaBirimleriVeSemboller = '{"TürkLirası" : "₺", "Dolar":"$","Euro":"€","Sterlin":"£"}';
+    //Bununla Para Miktarı İnputuna Değer Girilmeye Başlayınca Yazının Başına Paranın Sembolünü Ekliyorum.
+    ParaBirimleriVeSemboller = JSON.parse(ParaBirimleriVeSemboller);
+    console.log(ParaBirimleriVeSemboller);
+
+    $("#gelir-miktar").keypress(function () {
+        var miktar = $("#gelir-miktar").val();
+        if (secilenParaBirimiSembolu == null) {
+            secilenParaBirimiSembolu = ParaBirimleriVeSemboller.TürkLirası;
         }
-      })
-      //alert(secilenParaBirimiSembolu);
-      //var yeniMiktar = secilenParaBirimiSembolu + miktar;
-      //$("#miktar").val(yeniMiktar);
-    } else {
-      console.log(miktar.indexOf(secilenParaBirimiSembolu));
+
+        if (miktar.indexOf(secilenParaBirimiSembolu) == -1) {
+
+            var yeniMiktar = secilenParaBirimiSembolu + miktar;
+            $("#gelir-miktar").val(yeniMiktar);
+
+            var paraSemboller = ["$", "€", "₺", "£"];
+            $(paraSemboller).each(function (index, item) {
+                var sonuc = miktar.indexOf(item);
+                if (sonuc > -1) {
+                    //O kelimenin indexini bulup onun yerine koyulmalı
+
+                    var removeItem = miktar[sonuc];
+                    miktar = miktar.replace(removeItem, secilenParaBirimiSembolu);
+
+                    $("#gelir-miktar").val(miktar);
+                }
+            })
+
+        } else {
+            console.log(miktar.indexOf(secilenParaBirimiSembolu));
+        }
+    });
+
+
+
+    //Seçilen Para Birimini Bulma
+    $(document).on("change", ".para-birimi", function () {
+        var p = $(this).val();
+        secilenParaBirimi = p;
+        SemboluBul();
+        var m = $("#miktar").val();
+        SemboluGuncelle(m, secilenParaBirimiSembolu);
+
+    });
+
+
+
+
+    function SemboluBul() {
+        if (secilenParaBirimi == "Türk Lirası") {
+            secilenParaBirimiSembolu = ParaBirimleriVeSemboller.TürkLirası;
+        } else if (secilenParaBirimi == "Dolar") {
+            secilenParaBirimiSembolu = ParaBirimleriVeSemboller.Dolar;
+        } else if (secilenParaBirimi == "Euro") {
+            secilenParaBirimiSembolu = ParaBirimleriVeSemboller.Euro;
+        } else {
+            secilenParaBirimiSembolu = ParaBirimleriVeSemboller.Sterlin;
+        }
     }
-  });
+
+    function SemboluGuncelle(m, s) {
+
+        var paraSemboller = ["$", "€", "₺", "£"];
+        $(paraSemboller).each(function (index, item) {
+            var sonuc = m.indexOf(item);
+            if (sonuc > -1) {
+                //O kelimenin indexini bulup onun yerine koyulmalı
+                var removeItem = m[sonuc];
+
+                m = m.replace(removeItem, s);
+
+                $("#miktar").val(m);
 
 
+            }
+        })
 
-  //Seçilen Para Birimini Bulma
-  $(document).on("change", ".para-birimi", function () {
-    var p = $(this).val();
-    secilenParaBirimi = p;
-    SemboluBul();
-    var m = $("#miktar").val();
-    SemboluGuncelle(m, secilenParaBirimiSembolu);
-    //alert(p);
-  });
-
-
-
-
-  function SemboluBul() {
-    if (secilenParaBirimi == "Türk Lirası") {
-      //alert(ParaBirimleriVeSemboller.TürkLirası);
-      secilenParaBirimiSembolu = ParaBirimleriVeSemboller.TürkLirası;
-    } else if (secilenParaBirimi == "Dolar") {
-      secilenParaBirimiSembolu = ParaBirimleriVeSemboller.Dolar;
-    } else if (secilenParaBirimi == "Euro") {
-      secilenParaBirimiSembolu = ParaBirimleriVeSemboller.Euro;
-    } else {
-      secilenParaBirimiSembolu = ParaBirimleriVeSemboller.Sterlin;
     }
-  }
-
-  function SemboluGuncelle(m, s) {
-
-    var paraSemboller = ["$", "€", "₺", "£"];
-    $(paraSemboller).each(function (index, item) {
-      var sonuc = m.indexOf(item);
-      if (sonuc > -1) {
-        //O kelimenin indexini bulup onun yerine koyulmalı
-        //alert(miktar[sonuc]);
-        var removeItem = m[sonuc];
-
-        /*miktar = jQuery.grep(miktar, function(value) {
-              return value != removeItem;
-        });*/
-
-        m = m.replace(removeItem, s);
-
-        $("#miktar").val(m);
-
-
-      }
-    })
-
-  }
-
-
-
-
-
-
-
-
-
-
-  /*Hesap Ekleme POPUP*/
-
-  var HesapEklePopUp = '<div class="form-arkaplan">' +
-    '<div class="hesap-ekle-form">' +
-    '<p class="form-baslik"> HESAP EKLE </p>' +
-    '<input type="text" class="hesap-adi" placeholder="Hesap Adı">' +
-    '<span class="para-input"> <input type="text" id="miktar" class="hesap-adi" placeholder="Miktar" ></span>' +
-
-    '<select name="para-birimi" class="para-birimi">' +
-    '<option>Dolar</option>' +
-    '<option>Türk Lirası</option>' +
-    '<option>Euro</option>' +
-    '</select>' +
-    '<div class="radio-buttons">' +
-    '<label class="container">Nakit ' +
-    '<input type="radio"  name="radio">' +
-    '<span class="checkmark"></span>' +
-    '</label>' +
-
-    '<label class="container">Kart' +
-    '<input type="radio"  name="radio">' +
-    '<span class="checkmark"></span>' +
-    '</label>' +
-    '</div>' +
-
-    '<div class="hesap-ekleme-button">' +
-    '<p class="text"> Ekle </p>' +
-    '</div>' +
-    '</div>' +
-    '</div>';
-
 });

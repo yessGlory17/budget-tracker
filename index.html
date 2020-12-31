@@ -22,6 +22,7 @@
   <script src="./scripts/kategoriler.js"></script>
   <script src="./scripts/grafik.js"></script>
   <script src="./scripts/hareketler.js"></script>
+  <script src="./scripts/genelbakis.js"></script>
 </head>
 
 <body>
@@ -178,6 +179,62 @@
 
     </div>
 
+
+
+    <!--GENEL BAKIŞ-->
+    <div class="gelirler-ana-container">
+      <div class="gelir-gider-butonlar">
+        <div class="gelir-goster-button">
+          <p class="gelir-goster-text">Gelir</p>
+        </div>
+        <div class="gider-goster-button">
+          <p class="gider-goster-text">
+            Gider
+          </p>
+
+        </div>
+      </div>
+      <div class="gelirler-panel">
+        <div class="baslik-container">
+          <p class="bugun-baslik">Bugün</p>
+          <p class="bugun-gelir-miktar">₺1450</p>
+        </div>
+        <div class="gelir-ekle-button">
+          Ekle
+        </div>
+        <div class="gelir-liste">
+          <div class="gelir-item">
+            <div class="gelir-item-icon-container">
+              <i class="las la-money-bill" id="gelir-ikon"></i>
+            </div>
+            <div class="gelir-item-text-container">
+              <p class="gelir-adi">Maaş</p>
+              <p class="gelir-miktar">₺1400</p>
+              <p class="gelir-hesap">Garanti</p>
+            </div>
+          </div>
+
+          <div class="gelir-item">
+            <div class="gelir-item-icon-container">
+              <i class="las la-money-bill" id="gelir-ikon"></i>
+            </div>
+            <div class="gelir-item-text-container">
+              <p class="gelir-adi">Maaş</p>
+              <p class="gelir-miktar">₺1400</p>
+              <p class="gelir-hesap">Garanti</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="giderler-panel">
+        <div class="baslik-container">
+          <p class="bugun-baslik">Bugün</p>
+          <p class="bugun-gider-miktar">₺800</p>
+        </div>
+      </div>
+    </div>
+
+  </div>
   </div>
 
   <!--Hesap Ekleme Formu-->
@@ -323,6 +380,43 @@
       </div>
     </div>
   </div>
+
+
+
+
+  <!--GELİR EKLE FORM-->
+  <div class="gelir-form-arkaplan">
+    <div class="gelir-ekle-form">
+      <div class="harcama-ekleme-kapat-icon">
+        <i class="las la-times" id="gelir-ekleme-kapat-icon"></i>
+      </div>
+      <p class="form-baslik"> GELİR EKLE</p>
+      <input type="text" class="hesap-adi" id="gelir-adi" placeholder="Gelir Adı">
+      <span class="para-input"> <input type="text" id="gelir-miktar" class="hesap-adi" placeholder="Miktar"></span>
+
+      <select name="gelir-ekle-hesap-secimi" class="gelir-ekle-hesap-secimi">
+        <!-- <option>Garanti</option>
+        <option>Ziraat</option>
+        <option>Döviz</option> -->
+      </select>
+      <!-- <div class="radio-buttons">
+        <label class="container">Nakit
+          <input type="radio" name="radio">
+          <span class="checkmark"></span>
+        </label>
+
+        <label class="container">Kart
+          <input type="radio" name="radio">
+          <span class="checkmark"></span>
+        </label>
+      </div> -->
+
+      <div class="gelir-ekleme-button">
+        <p class="text"> Ekle </p>
+      </div>
+    </div>
+  </div>
+
 
 
 </body>

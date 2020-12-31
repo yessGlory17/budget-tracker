@@ -1,5 +1,5 @@
 $(document).ready(function () {
-
+    //alert("Çalıştı");
     var toplamGider = [];
     KategoriBilgileriniYukle();
 

@@ -55,6 +55,18 @@ $(document).ready(function () {
   });
 
 
+  $("#genel-bakis").on("click", function () {
+    //alert();
+    clickLeftButton = $(this);
+    ActiveButtonControl();
+    $("#genel-bakis").delay(3000).css("border-left", "5px solid #21BF73");
+    $("#genel-bakis-icon").css("color", "#21BF73");
+    $(".ana > *").css("display", "none");
+    $(".gelirler-ana-container").css("display", "flex");
+
+    //console.log(clickLeftButton);
+  });
+
 
   //Bu fonksiyon menude kullanılacak buttonların aktifliğini kontrol ederek ona göre css uygular.
   function ActiveButtonControl() {
