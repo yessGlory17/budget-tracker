@@ -11,8 +11,8 @@ if(isset($_POST["geliradi"])){
     $gelirhesap = $_POST["gelirhesap"];
     $tarih = date("Y-m-d");
     //echo $baslik + $icerik + $etiketler;
-    $ekle = $db -> prepare("INSERT INTO gelirler SET geliradi=?, gelirmiktar=?, gelirhesap=?");
-    $ekle -> execute(array($geliradi, $gelirmiktar,$gelirhesap));
+    $ekle = $db -> prepare("INSERT INTO gelirler SET geliradi=?, gelirmiktar=?, gelirhesap=?,tarih=?");
+    $ekle -> execute(array($geliradi, $gelirmiktar,$gelirhesap, $tarih));
                 
                 
     if($ekle -> rowCount()){

@@ -1,4 +1,6 @@
-$(document).ready(function () {
+$(window).on("load", function () {
+
+    GelirleriGetir();
 
     $(".gelir-goster-button").click(function () {
         $(".giderler-panel").fadeOut(500).css("display", "none");
@@ -252,11 +254,104 @@ $(document).ready(function () {
 
                 //Para Transferi Hareketi Ekle
                 // HareketEkle("Transfer", hareketMiktar);
+                GelirleriGetir();
             },
             error: function (err) {
                 console.log(err);
             }
         });
+    }
+
+
+    var gelirToplami = 0.0;
+    var gelirlerDizi = [];
+    //Gelirleri Getir Ve Tabloya Ekle
+    function GelirleriGetir() {
+
+        $.ajax({
+            type: "GET",
+            url: "backend/gelirlerigetir.php",
+            success: function (response) {
+                var hesapParaBirimi;
+                console.log("Hesaplar" + JSON.parse(response));
+
+                var gelirler = JSON.parse(response);
+                $(".gelir-item").remove();
+                gelirToplami = parseFloat(gelirToplami);
+                $(gelirler).each(function (index, item) {
+                    //alert(item["geliradi"]);
+
+                    var gelirListeItem = '<div class="gelir-item">' +
+                        '<div class="gelir-item-icon-container">' +
+                        '<i class="las la-money-bill" id="gelir-ikon"></i>' +
+                        '</div>' +
+                        '<div class="gelir-item-text-container">' +
+                        '<p class="gelir-adi">' + item["geliradi"] + '</p>' +
+                        '<p class="gelir-miktar" >' + item["gelirmiktar"] + '</p >' +
+                        '<p class="gelir-hesap">' + item["gelirhesap"] + '</p>' +
+                        '</div>'
+                    '</div>';
+
+                    $(".gelir-liste").append(gelirListeItem);
+                    gelirlerDizi.push(item["gelirmiktar"]);
+
+                });
+                BugGunlukGeliriYazdir();
+
+
+            }
+        })
+
+
+        //Haftalık Gelir
+        $.ajax({
+            type: "GET",
+            url: "backend/gelirlerigetirhafta.php",
+            success: function (response) {
+                var hesapParaBirimi;
+                console.log("Hesaplar" + JSON.parse(response));
+
+                var gelirler = JSON.parse(response);
+                //$(".gelir-liste-hafta > .gelir-item").remove();
+                gelirToplami = parseFloat(gelirToplami);
+                $(gelirler).each(function (index, item) {
+                    //alert(item["geliradi"]);
+
+                    var gelirListeItem = '<div class="gelir-item">' +
+                        '<div class="gelir-item-icon-container">' +
+                        '<i class="las la-money-bill" id="gelir-ikon"></i>' +
+                        '</div>' +
+                        '<div class="gelir-item-text-container">' +
+                        '<p class="gelir-adi">' + item["geliradi"] + '</p>' +
+                        '<p class="gelir-miktar" >' + item["gelirmiktar"] + '</p >' +
+                        '<p class="gelir-hesap">' + item["gelirhesap"] + '</p>' +
+                        '</div>'
+                    '</div>';
+
+                    $(".gelir-liste-hafta").append(gelirListeItem);
+                    gelirlerDizi.push(item[0]["gelirmiktar"]);
+                    //alert("Basıldı");
+                });
+                BugGunlukGeliriYazdir();
+
+
+            }
+        })
+
+
+
+    }
+
+
+    function BugGunlukGeliriYazdir() {
+        $(gelirlerDizi).each(function (index, item) {
+            var temizlenmisGelir = SemboluSil(item);
+            temizlenmisGelir = parseFloat(temizlenmisGelir);
+            gelirToplami = gelirToplami + temizlenmisGelir;
+
+        });
+        gelirToplami = "₺" + gelirToplami;
+        $(".bugun-gelir-miktar").text(gelirToplami);
     }
 
     //Get metoduyla veri tabanından hesap isimlerini alıp dinamik olarak selectbox içerisine ekleme.

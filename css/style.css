@@ -9,7 +9,9 @@
   body{
     background-color: #212529/*#e7e4f0*/;
   }
-  
+  body::-webkit-scrollbar{
+    display: none;
+  }
 
 .ana{
   display: flex;
@@ -864,7 +866,7 @@ option{
   display: flex;
   flex-direction: column;
   align-items: center;
-  
+  padding-bottom: 50px;
   
 }
 .toplam-gider{
@@ -1482,7 +1484,7 @@ p.gider-goster-text{
 
 .gelirler-panel{
   width: 500px;
-  height: 400px;
+  min-height: 400px;
   background-color: #272B2F;
   box-shadow: 0 5px 8px rgba(0, 0, 0, 0.3);
   margin-top: 10px;
@@ -1490,10 +1492,11 @@ p.gider-goster-text{
   flex-direction: column;
   align-items: center;
   border-radius: 5px;
+  padding-bottom: 50px;
 }
 .giderler-panel{
   width: 500px;
-  height: 400px;
+  min-height: 400px;
   background-color: #272B2F;
   box-shadow: 0 5px 8px rgba(0, 0, 0, 0.3);
   margin-top: 10px;
@@ -1501,6 +1504,7 @@ p.gider-goster-text{
   flex-direction: column;
   align-items: center;
   border-radius: 5px;
+  padding-bottom: 50px;
 }
 .baslik-container{
   display: flex;
@@ -1543,6 +1547,14 @@ p.bugun-gider-miktar{
   margin-top: 10px;
 }
 .gelir-liste{
+  width: 100%;
+  min-height: 200px;
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.gelir-liste-hafta{
   width: 100%;
   min-height: 200px;
   margin-top: 10px;
