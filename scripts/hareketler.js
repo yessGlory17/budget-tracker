@@ -1,6 +1,8 @@
 $(document).ready(function () {
     var tarihler = [];
     var kopya = [];
+
+
     //Default seçime göre hepsini gruplu getir.
     $.ajax({
         type: "GET",
@@ -116,26 +118,26 @@ $(document).ready(function () {
     function IkonuBul(kategori, alan) {
         if (alan == "Harcama") {
             if (kategori == "market") {
-                return '<i class="las la-shopping-basket" id="market-icon"></i>';
+                return '<i class="las la-shopping-basket" id="market-icon" data-ikon-etiket="harcama"></i>';
             }
 
             if (kategori == "saglik") {
-                return '<i class="las la-leaf" id="saglik-icon"></i>';
+                return '<i class="las la-leaf" id="saglik-icon" data-ikon-etiket="harcama"></i>';
             }
 
             if (kategori == "ulasim") {
-                return '<i class="las la-bus" id="ulasim-icon"></i>';
+                return '<i class="las la-bus" id="ulasim-icon" data-ikon-etiket="harcama"></i>';
             }
 
             if (kategori == "yemek") {
-                return '<i class="las la-utensils" id="yemek-icon"></i>';
+                return '<i class="las la-utensils" id="yemek-icon" data-ikon-etiket="harcama"></i>';
             }
             if (kategori == "sinema") {
-                return '<i class="las la-film" id="sinema-icon"></i>';
+                return '<i class="las la-film" id="sinema-icon" data-ikon-etiket="harcama"></i>';
             }
 
             if (kategori == "egitim") {
-                return '<i class="las la-book" id="egitim-icon"></i>';
+                return '<i class="las la-book" id="egitim-icon" data-ikon-etiket="harcama"></i>';
             }
         }
 
@@ -206,4 +208,7 @@ $(document).ready(function () {
 
         return i;
     }
+
+
+
 });

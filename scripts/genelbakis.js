@@ -1,7 +1,7 @@
 $(window).on("load", function () {
 
     GelirleriGetir();
-
+    GiderleriGetir();
     $(".gelir-goster-button").click(function () {
         $(".giderler-panel").fadeOut(500).css("display", "none");
         $(".gelirler-panel").fadeIn(500).css("display", "flex");
@@ -265,6 +265,7 @@ $(window).on("load", function () {
 
     var gelirToplami = 0.0;
     var gelirlerDizi = [];
+    var haftalikGelirlerDizi = [];
     //Gelirleri Getir Ve Tabloya Ekle
     function GelirleriGetir() {
 
@@ -276,12 +277,13 @@ $(window).on("load", function () {
                 console.log("Hesaplar" + JSON.parse(response));
 
                 var gelirler = JSON.parse(response);
-                $(".gelir-item").remove();
+                $("#gelir-liste-buhafta").remove();
+                $("#gelir-liste-bugun").remove();
                 gelirToplami = parseFloat(gelirToplami);
                 $(gelirler).each(function (index, item) {
                     //alert(item["geliradi"]);
 
-                    var gelirListeItem = '<div class="gelir-item">' +
+                    var gelirListeItem = '<div class="gelir-item" id="gelir-liste-bugun">' +
                         '<div class="gelir-item-icon-container">' +
                         '<i class="las la-money-bill" id="gelir-ikon"></i>' +
                         '</div>' +
@@ -299,44 +301,131 @@ $(window).on("load", function () {
                 BugGunlukGeliriYazdir();
 
 
+                //Haftalık Gelir
+                $.ajax({
+                    type: "GET",
+                    url: "backend/gelirlerigetirhafta.php",
+                    success: function (response) {
+                        var hesapParaBirimi;
+                        console.log("Hesaplar" + JSON.parse(response));
+
+                        var gelirler = JSON.parse(response);
+
+
+                        gelirToplami = parseFloat(gelirToplami);
+                        $(gelirler).each(function (index, item) {
+                            //alert(item["geliradi"]);
+
+                            var gelirListeItem = '<div class="gelir-item" id="gelir-liste-buhafta">' +
+                                '<div class="gelir-item-icon-container">' +
+                                '<i class="las la-money-bill" id="gelir-ikon"></i>' +
+                                '</div>' +
+                                '<div class="gelir-item-text-container">' +
+                                '<p class="gelir-adi">' + item["geliradi"] + '</p>' +
+                                '<p class="gelir-miktar" >' + item["gelirmiktar"] + '</p >' +
+                                '<p class="gelir-hesap">' + item["gelirhesap"] + '</p>' +
+                                '</div>'
+                            '</div>';
+
+                            $(".gelir-liste-hafta").append(gelirListeItem);
+                            //gelirlerDizi.push(item["gelirmiktar"]);
+                            haftalikGelirlerDizi.push(item["gelirmiktar"]);
+                            //alert("Basıldı");
+                        });
+                        HaftalikGeliriYazdir();
+
+
+                    }
+                })
+
             }
         })
 
 
-        //Haftalık Gelir
+
+
+
+
+    }
+
+    var HaftalikGiderDizi = [];
+    function GiderleriGetir() {
         $.ajax({
             type: "GET",
-            url: "backend/gelirlerigetirhafta.php",
+            url: "backend/hareketlertariharaligihafta.php",
             success: function (response) {
                 var hesapParaBirimi;
                 console.log("Hesaplar" + JSON.parse(response));
 
-                var gelirler = JSON.parse(response);
-                //$(".gelir-liste-hafta > .gelir-item").remove();
+                var giderler = JSON.parse(response);
+
+
                 gelirToplami = parseFloat(gelirToplami);
-                $(gelirler).each(function (index, item) {
+                $(giderler).each(function (index, item) {
                     //alert(item["geliradi"]);
 
-                    var gelirListeItem = '<div class="gelir-item">' +
+                    var giderListeItem = '<div class="gelir-item" id="gelir-liste-buhafta">' +
                         '<div class="gelir-item-icon-container">' +
-                        '<i class="las la-money-bill" id="gelir-ikon"></i>' +
+                        IkonuBul(item["kategori"], item["islem"]) +
                         '</div>' +
                         '<div class="gelir-item-text-container">' +
-                        '<p class="gelir-adi">' + item["geliradi"] + '</p>' +
-                        '<p class="gelir-miktar" >' + item["gelirmiktar"] + '</p >' +
-                        '<p class="gelir-hesap">' + item["gelirhesap"] + '</p>' +
+                        '<p class="gelir-adi">' + item["islem"] + '</p>' +
+                        '<p class="gelir-miktar" >' + item["miktar"] + '</p >' +
+                        '<p class="gelir-hesap">' + item["kategori"] + '</p>' +
                         '</div>'
                     '</div>';
 
-                    $(".gelir-liste-hafta").append(gelirListeItem);
-                    gelirlerDizi.push(item[0]["gelirmiktar"]);
+                    $(".gider-liste-hafta").append(giderListeItem);
+                    //gelirlerDizi.push(item["gelirmiktar"]);
+                    console.log("GİDER ITEM =================>  " + item["miktar"])
+                    HaftalikGiderDizi.push(item["miktar"]);
                     //alert("Basıldı");
                 });
-                BugGunlukGeliriYazdir();
+                //HaftalikGeliriYazdir();
 
+
+
+
+                $.ajax({
+                    type: "GET",
+                    url: "backend/hareketlertariharaligibugun.php",
+                    success: function (response) {
+                        var hesapParaBirimi;
+                        console.log("Hesaplar" + JSON.parse(response));
+
+                        var giderler = JSON.parse(response);
+
+
+                        gelirToplami = parseFloat(gelirToplami);
+                        $(giderler).each(function (index, item) {
+                            //alert(item["geliradi"]);
+
+                            var giderListeItem = '<div class="gelir-item" id="gelir-liste-buhafta">' +
+                                '<div class="gelir-item-icon-container">' +
+                                IkonuBul(item["kategori"], item["islem"]) +
+                                '</div>' +
+                                '<div class="gelir-item-text-container">' +
+                                '<p class="gelir-adi">' + item["islem"] + '</p>' +
+                                '<p class="gelir-miktar" >' + item["miktar"] + '</p >' +
+                                '<p class="gelir-hesap">' + item["kategori"] + '</p>' +
+                                '</div>'
+                            '</div>';
+
+                            $(".gider-liste-bugun").append(giderListeItem);
+                            //gelirlerDizi.push(item["gelirmiktar"]);
+                            console.log("GİDER ITEM =================>  " + item["miktar"])
+                            HaftalikGiderDizi.push(item["miktar"]);
+                            //alert("Basıldı");
+                        });
+                        //HaftalikGeliriYazdir();
+
+
+                    }
+                })
 
             }
         })
+
 
 
 
@@ -344,14 +433,35 @@ $(window).on("load", function () {
 
 
     function BugGunlukGeliriYazdir() {
+        var toplam = 0.0;
         $(gelirlerDizi).each(function (index, item) {
             var temizlenmisGelir = SemboluSil(item);
+            gelirToplami = parseFloat(gelirToplami);
             temizlenmisGelir = parseFloat(temizlenmisGelir);
             gelirToplami = gelirToplami + temizlenmisGelir;
-
+            toplam += temizlenmisGelir;
+            console.log("GELİRLER DİZİ #2 =================>  " + SemboluSil(item));
+            console.log("GELİRLER DİZİ #2 =================>  " + typeof (parseFloat(SemboluSil(item))));
+            console.log("GELİRLER TOPLAMI =========> " + toplam);
         });
-        gelirToplami = "₺" + gelirToplami;
-        $(".bugun-gelir-miktar").text(gelirToplami);
+        toplam = "₺" + toplam.toString();
+        $(".bugun-gelir-miktar").text(toplam);
+    }
+
+    function HaftalikGeliriYazdir() {
+        var toplam = 0.0;
+        $(haftalikGelirlerDizi).each(function (index, item) {
+            var temizlenmisGelir = SemboluSil(item);
+            gelirToplami = parseFloat(gelirToplami);
+            temizlenmisGelir = parseFloat(temizlenmisGelir);
+            gelirToplami = gelirToplami + temizlenmisGelir;
+            toplam += temizlenmisGelir;
+            console.log("GELİRLER DİZİ #2 =================>  " + SemboluSil(item));
+            console.log("GELİRLER DİZİ #2 =================>  " + typeof (parseFloat(SemboluSil(item))));
+            console.log("GELİRLER TOPLAMI =========> " + toplam);
+        });
+        toplam = "₺" + toplam.toString();
+        $(".buhafta-gelir-miktar").text(toplam);
     }
 
     //Get metoduyla veri tabanından hesap isimlerini alıp dinamik olarak selectbox içerisine ekleme.
@@ -504,4 +614,42 @@ $(window).on("load", function () {
         })
 
     }
+
+
+    //Harcama Kategorisine Göre İkonu Getirir.
+    function IkonuBul(kategori, alan) {
+        if (alan == "Harcama") {
+            if (kategori == "market") {
+                return '<i class="las la-shopping-basket" id="market-icon" data-ikon-etiket="harcama"></i>';
+            }
+
+            if (kategori == "saglik") {
+                return '<i class="las la-leaf" id="saglik-icon" data-ikon-etiket="harcama"></i>';
+            }
+
+            if (kategori == "ulasim") {
+                return '<i class="las la-bus" id="ulasim-icon" data-ikon-etiket="harcama"></i>';
+            }
+
+            if (kategori == "yemek") {
+                return '<i class="las la-utensils" id="yemek-icon" data-ikon-etiket="harcama"></i>';
+            }
+            if (kategori == "sinema") {
+                return '<i class="las la-film" id="sinema-icon" data-ikon-etiket="harcama"></i>';
+            }
+
+            if (kategori == "egitim") {
+                return '<i class="las la-book" id="egitim-icon" data-ikon-etiket="harcama"></i>';
+            }
+        }
+
+        if (alan == "Transfer") {
+            //Buradakileri Yap.
+            return '<i class="las la-exchange-alt" id="saglik-icon"></i>';
+        }
+    }
+
+
+
+
 });

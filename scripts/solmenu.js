@@ -68,6 +68,18 @@ $(document).ready(function () {
   });
 
 
+  $("#cikis").on("click", function () {
+    //alert();
+    clickLeftButton = $(this);
+    ActiveButtonControl();
+    $("#cikis").delay(3000).css("border-left", "5px solid #21BF73");
+    $("#cikis-icon").css("color", "#21BF73");
+
+
+    //console.log(clickLeftButton);
+  });
+
+
   //Bu fonksiyon menude kullanılacak buttonların aktifliğini kontrol ederek ona göre css uygular.
   function ActiveButtonControl() {
     //alert(RemoveItems(clickLeftButton));

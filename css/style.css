@@ -109,7 +109,22 @@
   color: #A3A5A8/*#5ead87*/;
 }
 
-  
+#cikis{
+  margin-top: 60px;
+}
+
+#cikis-icon{
+  font-size: 45px;
+  color: #A3A5A8 /*#21BF73*/;
+  padding-left: 14px;
+}
+
+.cikis-text{
+  font-size: 12px;
+  font-family: 'Roboto';
+  text-align: center;
+  color: #A3A5A8/*#5ead87*/;
+}
 
 .hesaplar-container{
   width: 700px;
@@ -1120,6 +1135,12 @@ p.harcama-kategori-adi{
   padding-left:12px;
 }
 
+input[data-input-name="hesap-ekleme-input"]:hover{
+  border-bottom: 1px solid #21BF73 !important;
+}
+input[data-input-name="hesap-miktar-input"]:hover{
+  border-bottom: 1px solid #21BF73 !important;
+}
 .hesap-adi:focus{
   outline: none;
   color:#762cd1;
@@ -1295,7 +1316,7 @@ option{
 .hareket-item{
   width: 90%;
   height: 40px;
-  border: 1px solid #ced6e0;
+  border: 1px solid #2c3136;
   margin-top: 10px;
   border-radius: 5px;
   display: flex; 
@@ -1307,7 +1328,7 @@ option{
   width: 60px;
   height: 40px;
   background-color: #60a3bc;
-  
+  border-radius: 0px 5px 0px 5px;
 }
 
 .hareket-tarih{
@@ -1526,6 +1547,14 @@ p.bugun-gelir-miktar{
   float: right;
   margin-top: 20px;
 }
+p.buhafta-gelir-miktar{
+  font-size: 25px;
+  font-family:'Roboto';
+  padding-left: 20px;
+  color: #55efc4;
+  float: right;
+  margin-top: 20px;
+}
 p.bugun-gider-miktar{
   font-size: 25px;
   font-family:'Roboto';
@@ -1548,13 +1577,29 @@ p.bugun-gider-miktar{
 }
 .gelir-liste{
   width: 100%;
-  min-height: 200px;
+  min-height: 100px;
   margin-top: 10px;
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 .gelir-liste-hafta{
+  width: 100%;
+  min-height: 200px;
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.gider-liste-bugun{
+  width: 100%;
+  /* min-height: 200px; */
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.gider-liste-hafta{
   width: 100%;
   min-height: 200px;
   margin-top: 10px;
@@ -1571,7 +1616,9 @@ p.bugun-gider-miktar{
   margin-top: 10px;
   border-radius: 5px 0px 0px 5px;
 }
-
+i[data-ikon-etiket="harcama"]{
+  padding-top: 5px !important;
+}
 .gelir-item-icon-container{
   width: 60px;
   height: 40px;

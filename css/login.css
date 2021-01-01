@@ -1,0 +1,78 @@
+body{
+    background-color: #212529;
+  }
+  .login-main{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .login-container{
+    width: 300px;
+    height: 250px;
+    background-color: #272B2F;
+    border-radius: 5px;
+    box-shadow: 0 15px 18px rgba(0, 0, 0, 0.4);
+    margin-top: 100px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  p.login-container-baslik{
+    font-family: 'Roboto';
+    font-size: 25px;
+    text-align: center;
+    color: #21BF73;
+  }
+  
+  .login-kullanici-adi{
+    width: 70%;
+    height: 35px;
+    background-color: #272B2F;
+    border: none;
+    border-bottom: 1px solid #A3A5A8;
+    font-size: 20px;
+    font-family: 'Roboto';
+    text-align: center;
+    transition: border-bottom .5s;
+    color: #21BF73;
+  }
+  
+  .login-kullanici-adi:focus{
+    outline: none;
+    border-bottom: 1px solid #21BF73;
+    transition: border-bottom .5s;
+  }
+  
+  .login-sifre{
+    width: 70%;
+    height: 35px;
+    background-color: #272B2F;
+    border: none;
+    border-bottom: 1px solid #A3A5A8;
+    font-size: 20px;
+    font-family: 'Roboto';
+    text-align: center;
+    transition: border-bottom .5s;
+    color: #21BF73;
+    margin-top: 20px;
+  }
+  
+  .login-sifre:focus{
+    outline: none;
+    border-bottom: 1px solid #21BF73;
+    transition: border-bottom .5s;
+  }
+  
+  .login-button{
+    width: 100%;
+    height: 35px;
+    background-color: #21BF73;
+    text-align: center;
+    font-size: 25px;
+    font-family: 'Roboto';
+    color : #272B2F;
+    margin-top: 40px;
+    border-radius: 0px 0px 5px 5px;
+    cursor: pointer;
+  }

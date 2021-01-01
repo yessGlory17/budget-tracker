@@ -1,5 +1,6 @@
 $(document).ready(function () {
     //alert("Çalıştı");
+
     var toplamGider = [];
     KategoriBilgileriniYukle();
 
@@ -367,27 +368,6 @@ $(document).ready(function () {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     var secilenParaBirimi = null;
     var secilenParaBirimiSembolu = null;
     var ParaBirimleriVeSemboller = '{"TürkLirası" : "₺", "Dolar":"$","Euro":"€","Sterlin":"£"}';
@@ -510,4 +490,7 @@ $(document).ready(function () {
             }
         });
     }
+
+
+
 });
