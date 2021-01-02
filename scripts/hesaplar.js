@@ -160,6 +160,16 @@ $(document).ready(function () {
     });
   }
 
+  //Eğer düzenleme formunda para birimi değiştirildiyse olacaklar.
+  $(document).on("change", ".para-birimi-duzenle", function () {
+    var dMiktar = $("#duzenle-miktar").val();
+    var yeniParaBirimi = $(".para-birimi-duzenle option:selected").text();
+    secilenParaBirimi = yeniParaBirimi;
+    SemboluBul();
+    HesapDuzenleSemboluGuncelle(dMiktar, secilenParaBirimiSembolu);
+
+  })
+
   // $(document).on("change", ".para-birimi-duzenle", function () {
   //   var p = $(this).val();
   //   secilenParaBirimi = p;
@@ -194,6 +204,8 @@ $(document).ready(function () {
 
     $(".hesap-item").remove();
     HesaplariGetir();
+
+    $("#hesaplar-liste").load(document.url + '#hesaplar-liste');
   }
 
   /*Hesap Ekleme Form*/
@@ -269,6 +281,8 @@ $(document).ready(function () {
       secilenParaBirimiSembolu = ParaBirimleriVeSemboller.Sterlin;
     }
   }
+
+
 
   function SemboluGuncelle(m, s) {
 

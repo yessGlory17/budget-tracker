@@ -204,6 +204,11 @@ $(document).ready(function () {
 
             }
         })
+
+        $(".hesap-item").remove();
+        HesaplariGetir();
+
+        $("#hesaplar-liste").load(document.url + '#hesaplar-liste');
     });
 
 

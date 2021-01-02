@@ -1,5 +1,7 @@
 $(window).on("load", function () {
 
+   
+
     GelirleriGetir();
     GiderleriGetir();
     $(".gelir-goster-button").click(function () {
