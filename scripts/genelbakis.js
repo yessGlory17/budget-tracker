@@ -245,6 +245,7 @@ $(window).on("load", function () {
         //alert("Gelir Miktar => " + gelirMiktar);
         //Seçili Hesap Adını Al
         var secilenHesap = $(".gelir-ekle-hesap-secimi :selected").val();
+
         $.ajax({
             type: "POST",
             url: "backend/gelirekle.php",
@@ -352,6 +353,7 @@ $(window).on("load", function () {
     }
 
     var HaftalikGiderDizi = [];
+    var GunlukGiderDizi = [];
     function GiderleriGetir() {
         $.ajax({
             type: "GET",
@@ -374,7 +376,7 @@ $(window).on("load", function () {
                         '<div class="gelir-item-text-container">' +
                         '<p class="gelir-adi">' + item["islem"] + '</p>' +
                         '<p class="gelir-miktar" >' + item["miktar"] + '</p >' +
-                        '<p class="gelir-hesap">' + item["kategori"] + '</p>' +
+                        '<p class="gelir-hesap">' + item["aciklama"] + '</p>' +
                         '</div>'
                     '</div>';
 
@@ -385,7 +387,7 @@ $(window).on("load", function () {
                     //alert("Basıldı");
                 });
                 //HaftalikGeliriYazdir();
-
+                BugHaftalikGideriYazdir();
 
 
 
@@ -410,18 +412,19 @@ $(window).on("load", function () {
                                 '<div class="gelir-item-text-container">' +
                                 '<p class="gelir-adi">' + item["islem"] + '</p>' +
                                 '<p class="gelir-miktar" >' + item["miktar"] + '</p >' +
-                                '<p class="gelir-hesap">' + item["kategori"] + '</p>' +
+                                '<p class="gelir-hesap">' + item["aciklama"] + '</p>' +
                                 '</div>'
                             '</div>';
 
                             $(".gider-liste-bugun").append(giderListeItem);
                             //gelirlerDizi.push(item["gelirmiktar"]);
                             console.log("GİDER ITEM =================>  " + item["miktar"])
-                            HaftalikGiderDizi.push(item["miktar"]);
+                            GunlukGiderDizi.push(item["miktar"]);
                             //alert("Basıldı");
                         });
                         //HaftalikGeliriYazdir();
 
+                        BugGunlukGideriYazdir();
 
                     }
                 })
@@ -432,6 +435,39 @@ $(window).on("load", function () {
 
 
 
+    }
+
+
+    function BugGunlukGideriYazdir() {
+        var toplam = 0.0;
+        $(GunlukGiderDizi).each(function (index, item) {
+            var temizlenmisGelir = SemboluSil(item);
+            gelirToplami = parseFloat(gelirToplami);
+            temizlenmisGelir = parseFloat(temizlenmisGelir);
+            gelirToplami = gelirToplami + temizlenmisGelir;
+            toplam += temizlenmisGelir;
+            console.log("GİDERLER DİZİ #2 =================>  " + SemboluSil(item));
+            console.log("GİDERLER DİZİ #2 =================>  " + typeof (parseFloat(SemboluSil(item))));
+            console.log("GİDERLER TOPLAMI =========> " + toplam);
+        });
+        toplam = "₺" + toplam.toString();
+        $(".bugun-gider-miktar").text(toplam);
+    }
+
+    function BugHaftalikGideriYazdir() {
+        var toplam = 0.0;
+        $(HaftalikGiderDizi).each(function (index, item) {
+            var temizlenmisGelir = SemboluSil(item);
+            gelirToplami = parseFloat(gelirToplami);
+            temizlenmisGelir = parseFloat(temizlenmisGelir);
+            gelirToplami = gelirToplami + temizlenmisGelir;
+            toplam += temizlenmisGelir;
+            console.log("GİDERLER DİZİ #2 =================>  " + SemboluSil(item));
+            console.log("GİDERLER DİZİ #2 =================>  " + typeof (parseFloat(SemboluSil(item))));
+            console.log("GİDERLER TOPLAMI =========> " + toplam);
+        });
+        toplam = "₺" + toplam.toString();
+        $(".buhafta-gider-miktar").text(toplam);
     }
 
 

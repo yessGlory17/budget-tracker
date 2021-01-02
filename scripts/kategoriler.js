@@ -97,8 +97,10 @@ $(document).ready(function () {
         //alert(kategori);
         var harcamaMiktar = $("#harcama-miktar").val();
         var secilenHesap = $(".kategori-secimi option:selected").attr("value");
+
+        var aciklama = $("#harcama-aciklama").val();
         //alert("Harcam Miktar Test : " + harcamaMiktar + "Type  :  " + typeof (harcamaMiktar));
-        HareketEkle("Harcama", harcamaMiktar, kategori);
+        HareketEkle("Harcama", harcamaMiktar, kategori, aciklama);
 
         $.ajax({
             type: "GET",
@@ -473,11 +475,12 @@ $(document).ready(function () {
         return temiz;
     }
 
-    function HareketEkle(islemAdi, miktar, kategori) {
+    function HareketEkle(islemAdi, miktar, kategori, aciklama) {
+        //alert("Açıklama  " + aciklama);
         $.ajax({
             type: "POST",
             url: "backend/hareketekle.php",
-            data: { islem: islemAdi, miktar: miktar, kategori: kategori },
+            data: { islem: islemAdi, miktar: miktar, kategori: kategori, aciklama: aciklama },
             dataType: "JSON",
             success: function (cevap) {
                 console.log(cevap);

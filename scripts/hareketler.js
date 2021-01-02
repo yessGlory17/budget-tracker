@@ -62,6 +62,8 @@ $(document).ready(function () {
                     TarihleriAyir(sonuc);
                 }
             })
+
+            $(".tarih").load(document.url + '.tarih');
         } else if (zamanAraligi == "bugun") {
             //alert("Bu Gun Secildi");
             $.ajax({
@@ -77,6 +79,7 @@ $(document).ready(function () {
                     TarihleriAyir(sonuc);
                 }
             })
+            $(".tarih").load(document.url + '.tarih');
         } else if (zamanAraligi == "buay") {
             //alert("Bu Ay Secildi");
             $.ajax({
@@ -92,6 +95,8 @@ $(document).ready(function () {
                     TarihleriAyir(sonuc);
                 }
             })
+
+            $(".tarih").load(document.url + '.tarih');
         } else {
             //Tüm Zamanlar..
             //alert("Tüm Zamanlar Secildi");
@@ -111,6 +116,8 @@ $(document).ready(function () {
 
                 }
             })
+
+            $(".tarih").load(document.url + '.tarih');
         }
 
     });

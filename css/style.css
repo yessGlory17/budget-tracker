@@ -1110,7 +1110,7 @@ canvas {
 
 .harcama-form{
   width: 300px;
-  height: 260px;
+  height: 330px;
   background-color: #272B2F;
   margin-top: 80px;
   display: flex; 
@@ -1318,7 +1318,23 @@ option{
   margin-top: 5px;
   cursor: pointer;
 }
-
+#harcama-miktar{
+  width: 200px;
+  height: 30px;
+  margin-top: 10px;
+  margin-left: 10px;
+  background-color: #272B2F;
+  border: none;
+  border-bottom: 1px solid #A3A5A8;
+  font-size: 20px;
+  padding-top: 10px;
+  padding-bottom: 0px;
+  text-align: center;
+  color: #A3A5A8;
+  transition: color .5s, border-bottom .5s;
+  font-family: 'Roboto';
+  padding-left:12px;
+}
 /*HAREKETLER*/
 
 
@@ -1586,6 +1602,16 @@ p.bugun-gider-miktar{
   float: right;
   margin-top: 20px;
 }
+
+p.buhafta-gider-miktar{
+  font-size: 25px;
+  font-family:'Roboto';
+  padding-left: 20px;
+  color: #ff7675;
+  float: right;
+  margin-top: 20px;
+}
+
 .gelir-ekle-button{
   width: 90%;
   height: 35px;

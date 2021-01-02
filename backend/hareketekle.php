@@ -9,10 +9,11 @@ if(isset($_POST["islem"])){
     $islem = $_POST["islem"];
     $miktar = $_POST["miktar"];
     $kategori = $_POST["kategori"];
+    $aciklama = $_POST["aciklama"];
     $tarih = date("Y-m-d");
     //echo $baslik + $icerik + $etiketler;
-    $ekle = $db -> prepare("INSERT INTO hareketler SET islem=?, miktar=?, kategori=?, tarih=?");
-    $ekle -> execute(array($islem, $miktar,$kategori, $tarih));
+    $ekle = $db -> prepare("INSERT INTO hareketler SET islem=?, miktar=?, kategori=?, aciklama=?, tarih=?");
+    $ekle -> execute(array($islem, $miktar,$kategori,$aciklama,$tarih));
                 
                 
     if($ekle -> rowCount()){

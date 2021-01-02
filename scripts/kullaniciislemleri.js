@@ -21,6 +21,10 @@ $(document).ready(function () {
     });
 
 
+    $(".kullanici-bilgileri-guncelle-button").click(function () {
+        KullaniciDuzenle();
+    });
+
     //Kullanıcı Bilgilerini Al Ve Formu Doldur
     function KullaniciBilgileriniGetir() {
         $.ajax({
@@ -35,14 +39,28 @@ $(document).ready(function () {
                     $(".kullanici-islemleri-email").val(item["email"]);
                     $(".kullanici-islemleri-sifre").val(item["sifre"]);
                 });
-
-
             }
         })
     }
 
     //Kullanıcı Bilgilerini Güncelle
+    function KullaniciDuzenle() {
+        var email = $(".kullanici-islemleri-email").val();
+        var sifre = $(".kullanici-islemleri-sifre").val();
+        $.ajax({
+            type: "POST",
+            url: "backend/kullaniciduzenle.php",
+            data: { email: email, sifre: sifre },
+            dataType: "JSON",
+            success: function (cevap) {
+                console.log(cevap);
 
+            },
+            error: function (err) {
+                console.log(err);
+            }
+        });
+    }
 
     //Sistem Loglarını Getir
     function LoglariGetir() {
