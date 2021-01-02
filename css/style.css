@@ -109,8 +109,28 @@
   color: #A3A5A8/*#5ead87*/;
 }
 
+/*Kullanici İslemleri*/
+#kullanici-islemleri{
+  margin-top: 20px;
+}
+
+#kullanici-islemleri-icon{
+  font-size: 45px;
+  color: #A3A5A8 /*#21BF73*/;
+  padding-left: 12px;
+}
+
+.kullanici-islemleri-text{
+  font-size: 12px;
+  font-family: 'Roboto';
+  text-align: center;
+  color: #A3A5A8/*#5ead87*/;
+}
+
+
 #cikis{
-  margin-top: 60px;
+  position: fixed;
+  bottom: 50px;
 }
 
 #cikis-icon{
@@ -124,6 +144,7 @@
   font-family: 'Roboto';
   text-align: center;
   color: #A3A5A8/*#5ead87*/;
+  padding-left: 10px;
 }
 
 .hesaplar-container{
@@ -885,7 +906,7 @@ option{
   
 }
 .toplam-gider{
-  width: 100vw;
+  width: 100%;
   height: 70px;
   font-size: 35px;
   font-family:'Roboto';
@@ -1137,9 +1158,11 @@ p.harcama-kategori-adi{
 
 input[data-input-name="hesap-ekleme-input"]:hover{
   border-bottom: 1px solid #21BF73 !important;
+  color: #21BF73 !important;
 }
 input[data-input-name="hesap-miktar-input"]:hover{
   border-bottom: 1px solid #21BF73 !important;
+  color: #21BF73 !important;
 }
 .hesap-adi:focus{
   outline: none;
@@ -1897,4 +1920,229 @@ option{
   color: white;
   text-align: center;
   
+}
+
+/*KULLANICI İŞLEMLERİ*/
+
+.kullanici-islemleri-container{
+  width: 400px;
+  min-height: 250px;
+  background-color: #272B2F;
+  box-shadow: 0 5px 8px rgba(0, 0, 0, 0.3);
+  margin-top: 50px;
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  border-radius: 5px;
+  padding-bottom: 20px;
+}
+.kullanici-islemleri-ana-container{
+  
+  margin-top: 5px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-radius: 5px;
+  padding-bottom: 20px;
+}
+p.kullanici-islemleri-baslik{
+  font-family: 'Roboto';
+  font-size: 25px;
+  text-align: center;
+  color: #21A064;
+  margin-top: 30px;
+}
+
+.kullanici-islemleri-email{
+  width: 300px;
+  height: 35px;
+  background-color: #272B2F;
+  border: none;
+  border-bottom: 1px solid #A3A5A8;
+  text-align: center;
+  font-family: 'Roboto';
+  font-size: 20px;
+  color: #A3A5A8;
+  transition: border-bottom .5s;
+  margin-top: 30px;
+}
+
+.kullanici-islemleri-email:focus{
+  outline: none;
+  border-bottom: 1px solid #21BF73;
+  color: #21BF73;
+  transition: border-bottom .5s;
+}
+
+.kullanici-islemleri-sifre{
+  width: 300px;
+  height: 35px;
+  background-color: #272B2F;
+  border: none;
+  border-bottom: 1px solid #A3A5A8;
+  text-align: center;
+  font-family: 'Roboto';
+  font-size: 20px;
+  color: #A3A5A8;
+  transition: border-bottom .5s;
+  margin-top: 20px;
+}
+
+.kullanici-islemleri-sifre:focus{
+  outline: none;
+  border-bottom: 1px solid #21BF73;
+  color: #21BF73;
+  transition: border-bottom .5s;
+}
+
+.kullanici-bilgileri-guncelle-button{
+  width: 300px;
+  height: 35px;
+  background-color:  #21BF73;
+  font-family:'Roboto';
+  font-size: 20px;
+  text-align: center;
+  margin-top: 20px;
+  padding-top: 10px;
+  border-radius: 5px;
+  box-shadow: 0 5px 8px rgba(0, 0, 0, 0.3);
+  cursor: pointer;
+  transition: box-shadow .5s;
+}
+
+.kullanici-bilgileri-guncelle-button:hover{
+  box-shadow: 0 15px 18px rgba(0, 0, 0, 0.3);
+  transition: box-shadow .5s;
+}
+
+.log-liste{
+  display: none;
+  flex-direction: column;
+  align-items: center;
+}
+
+.kullanici-detaylari-liste{
+  width: 50%;
+  border: 1px solid white;
+  margin-top: 10px;
+  padding-top: 20px;
+}
+
+.kullanici-detay-item{
+  width: 95%;
+  height: 50px;
+  border: 1px solid red;
+  margin-top: 10px;
+  
+}
+
+p.sistem-loglari-log-goster{
+  font-family: 'Roboto';
+  font-size: 20px;
+  color: #A3A5A8;
+  cursor: pointer;
+}
+
+p.sistem-loglari-log-gizle{
+  font-family: 'Roboto';
+  font-size: 20px;
+  color: #A3A5A8;
+  cursor: pointer;
+  display: none;
+  padding-top: 10px;
+}
+
+#daha-fazla-goster-icon{
+  padding-left: 10px;
+}
+
+.log-item{
+  width: 880px;
+  height: 40px;
+  border: 2px solid #2c3136;
+  border-radius: 0px 5px 5px 0px;
+  box-shadow: 0 0px 0px rgba(0, 0, 0, 0.3);
+  transition: box-shadow .5s;
+  margin-top: 10px;
+  cursor: pointer;
+}
+
+.log-item:hover{
+  box-shadow: 0 15px 18px rgba(0, 0, 0, 0.3);
+  transition: box-shadow .5s;
+}
+
+.log-kullanici-adi-container{
+  width: 40px;
+  height: 40px;
+  border-radius: 5px 0px 5px 0px;
+  display: flex;
+  flex-direction: row;
+  background-color: #21BF73;
+  float: left;
+}
+
+#log-kullanici-adi-icon{
+  font-size: 40px;
+  color: white;
+  float: left;
+  background-color: #21BF73;
+  border-radius: 5px 0px 5px 0px;
+}
+#log-kullanici-giris-zamani-icon{
+  font-size: 40px;
+  color: white;
+  float: left;
+  background-color: #21BF73;
+  border-radius: 5px 0px 5px 0px;
+  margin-left: 5px;
+}
+.log-kullanici-adi-text{
+  margin: 0;
+  padding-top: 7px;
+  padding-left: 10px;
+  padding-right: 10px;
+  float: left;
+  font-family: 'Roboto';
+  font-size: 20px;
+  color: #A3A5A8;
+}
+.log-kullanici-giris-zamani-text{
+  margin: 0;
+  padding-top: 7px;
+  padding-left: 10px;
+  padding-right: 10px;
+  float: left;
+  font-family: 'Roboto';
+  font-size: 20px;
+  color: #A3A5A8;
+}
+.log-kullanici-giris-zamani{
+  width: 40px;
+  height: 40px;
+  border-radius: 5px 0px 5px 0px;
+  display: flex;
+  flex-direction: row;
+  background-color: #21BF73;
+  float: right;
+}
+
+#log-kullanici-cikis-zamani-icon{
+  font-size: 40px;
+  color: white;
+  float: left;
+  background-color: #21BF73;
+  border-radius: 5px 0px 5px 0px;
+  margin-left: 5px;
+}
+
+.log-kullanici-cikis-zamani-text{
+  margin: 0;
+  padding-top: 7px;
+  padding-left: 10px;
+  padding-right: 10px;
+  float: left;
+  font-family: 'Roboto';
+  font-size: 20px;
+  color: #A3A5A8;
 }

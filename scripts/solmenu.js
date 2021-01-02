@@ -68,6 +68,19 @@ $(document).ready(function () {
   });
 
 
+  $("#kullanici-islemleri").on("click", function () {
+    //alert();
+    clickLeftButton = $(this);
+    ActiveButtonControl();
+    $("#kullanici-islemleri").delay(3000).css("border-left", "5px solid #21BF73");
+    $("#kullanici-islemleri-icon").css("color", "#21BF73");
+    $(".ana > *").css("display", "none");
+    $(".kullanici-islemleri-container").css("display", "flex");
+
+    //console.log(clickLeftButton);
+  });
+
+
   $("#cikis").on("click", function () {
     //alert();
     clickLeftButton = $(this);

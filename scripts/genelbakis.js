@@ -25,6 +25,9 @@ $(window).on("load", function () {
 
         //Burada Hesap İsimleri Selectbox içine Eklenecek.
         HesapIsimleriniGetir();
+
+        $("#gelirler-panel").load(document.url + '#gelirler-panel');
+        $("#giderler-panel").load(document.url + '#giderler-panel');
     });
 
 
@@ -506,6 +509,9 @@ $(window).on("load", function () {
                 });
             }
         })
+
+        $("#gelirler-panel").load(document.url + '#gelirler-panel');
+        $("#giderler-panel").load(document.url + '#giderler-liste');
     }
 
 

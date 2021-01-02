@@ -25,6 +25,7 @@
   <script src="./scripts/genelbakis.js"></script>
   <script src="./scripts/oturumkontrolu.js"></script>
   <script src="./scripts/cikis.js"></script>
+  <script src="./scripts/kullaniciislemleri.js"></script>
 </head>
 
 <body>
@@ -49,10 +50,17 @@
       <p class="hareketler-text"> Hareketler </p>
     </div>
 
+    <div class="sol-menu-button" id="kullanici-islemleri">
+      <i class="las la-user" id="kullanici-islemleri-icon"></i>
+      <p class="kullanici-islemleri-text"> Kullanıcı </p>
+    </div>
+
     <div class="sol-menu-button" id="cikis">
       <i class="las la-power-off" id="cikis-icon"></i>
       <p class="cikis-text"> Çıkış </p>
     </div>
+
+
   </div>
 
 
@@ -63,7 +71,7 @@
     <div class="hesaplar-container">
       <p class="hesaplar-baslik">HESAPLAR</p>
 
-      <div class="hesaplar-liste">
+      <div class="hesaplar-liste" id="hesaplar-liste">
         <!--Referans Hesap Item-->
         <!-- <div class="hesap-item">
           <div class="item-wallet-icon-container" style="float: left;">
@@ -201,7 +209,7 @@
 
         </div>
       </div>
-      <div class="gelirler-panel">
+      <div class="gelirler-panel" id="gelirler-panel">
         <div class="baslik-container">
           <p class="bugun-baslik">Bugün</p>
           <p class="bugun-gelir-miktar">₺0</p>
@@ -263,7 +271,7 @@
           </div> -->
         </div>
       </div>
-      <div class="giderler-panel">
+      <div class="giderler-panel" id="gelirler-panel">
         <div class="baslik-container">
           <p class="bugun-baslik">Bugün</p>
           <p class="bugun-gider-miktar">₺800</p>
@@ -279,6 +287,39 @@
 
     </div>
 
+
+    <!--KULLANICI İŞLEMLERİ-->
+    <div class="kullanici-islemleri-container">
+      <p class="kullanici-islemleri-baslik">KULLANICI İŞLEMLERİ</p>
+      <div class="kullanici-islemleri-ana-container">
+        <input type="text" class="kullanici-islemleri-email" placeholder="E-mail">
+        <input type="text" class="kullanici-islemleri-sifre" placeholder="Şifre">
+        <div class="kullanici-bilgileri-guncelle-button">Kaydet</div>
+      </div>
+
+
+      <p class="sistem-loglari-log-goster">Logları Göster <i class="las la-angle-down" id="daha-fazla-goster-icon"></i>
+      </p>
+
+      <p class="sistem-loglari-log-gizle">Logları Gizle <i class="las la-angle-down" id="daha-fazla-goster-icon"></i>
+      </p>
+
+      <div class="log-liste">
+
+        <!-- <div class="log-item">
+          <i class="las la-user" id="log-kullanici-adi-icon"></i>
+          <p class="log-kullanici-adi-text">admin@gmail.com</p>
+          <i class="las la-map-pin" id="log-kullanici-adi-icon"></i>
+          <p class="log-kullanici-adi-text">192.168.92.3</p>
+          <i class="las la-sign-in-alt" id="log-kullanici-giris-zamani-icon"></i>
+          <p class="log-kullanici-giris-zamani-text">01.01.2021 22:57</p>
+          <i class="las la-sign-out-alt" id="log-kullanici-cikis-zamani-icon"></i>
+          <p class="log-kullanici-cikis-zamani-text">02.01.2021 00:58</p>
+        </div> -->
+
+      </div>
+
+    </div>
 
 
   </div>

@@ -107,6 +107,8 @@ $(document).ready(function () {
                     $(".tarih").remove();
                     tarihler = [];
                     TarihleriAyir(sonuc);
+
+
                 }
             })
         }

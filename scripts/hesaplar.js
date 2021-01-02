@@ -103,7 +103,8 @@ $(document).ready(function () {
       dataType: "JSON",
       success: function (cevap) {
         console.log(cevap);
-
+        $(".hesap-item").remove();
+        HesaplariGetir();
         //alert(cevap);
       },
       error: function (err) {
@@ -115,6 +116,8 @@ $(document).ready(function () {
     $(".hesap-ekle-form-arkaplan").fadeOut(500);
     $(".hesap-item").remove();
     HesaplariGetir();
+
+    $("#hesaplar-liste").load(document.url + '#hesaplar-liste');
   }
   var duzenlenecekID;
   //Duzenleme Butonun Tıklanma Olayı
@@ -392,6 +395,7 @@ $(document).ready(function () {
         var sonuc = JSON.parse(response);
 
 
+        $(".hesap-item").remove();
 
         $(sonuc).each(function (index, item) {
 

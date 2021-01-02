@@ -14,7 +14,7 @@ $(document).ready(function () {
             type: "GET",
             url: "backend/cikis.php",
             success: function (response) {
-                console.log(JSON.parse(response));
+                //console.log(JSON.parse(response));
                 var sonuc = JSON.parse(response);
 
                 if (sonuc) {
